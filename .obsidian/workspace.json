@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/04 Web development.md",
+                "file": "Spring/05 aspect oriented programming.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/04 Web development.md",
+                "file": "Spring/05 aspect oriented programming.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Spring/04 Web development.md",
+                "file": "Spring/05 aspect oriented programming.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/04 Web development.md"
+                "file": "Spring/05 aspect oriented programming.md"
               }
             }
           }
@@ -148,6 +148,11 @@
   },
   "active": "fac42d71ef99aecc",
   "lastOpenFiles": [
+    "Spring/Dependency Injection/06 Bean Scopes.md",
+    "Spring/05 aspect oriented programming.md",
+    "Spring/04 Web development.md",
+    "Spring/Dependency Injection/05 Autowiring multiple objects of same type.md",
+    "Spring/Dependency Injection/04 Autowiring.md",
     "Pasted image 20240918100201.png",
     "Pasted image 20240918095419.png",
     "Pasted image 20240918095405.png",
@@ -158,17 +163,11 @@
     "Pasted image 20240917091201.png",
     "Pasted image 20240917091042.png",
     "Pasted image 20240917083407.png",
-    "Pasted image 20240916234013.png",
-    "Spring/Dependency Injection/06 Bean Scopes.md",
-    "Spring/Dependency Injection/05 Autowiring multiple objects of same type.md",
-    "Spring/05 aspect oriented programming.md",
-    "Spring/04 Web development.md",
     "Untitled.md",
     "concurrency/Built in thread pool, CompletableFuture.md",
     "concurrency/THREADS.md",
     "concurrency/FUTURES.md",
     "concurrency/Multitasking vs Multithreading.md",
-    "Spring/Dependency Injection/04 Autowiring.md",
     "Spring/Dependency Injection/03 Programatically adding beans.md",
     "Spring/02 Functional interfaces.md",
     "Spring/Dependency Injection/02 Stereotypical bean.md",
