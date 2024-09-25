@@ -41,3 +41,19 @@ Inside the singleton class the prototype bean will effectively be singleton
 
 # immutable state classes should be made singleton
 # Mutable State classes should be made prototype
+
+# Bean Web Scopes
+1. Session
+	1. @SessionScope
+	2. spring keeps the instance in the servers memory for the full http session
+	3. the object is linked with the client session
+	4. or as long as the browser is open  
+2. Request
+	1. @RequestScope
+	2. new instance for each and every http request
+3. Application
+	1. @ApplicationScope
+	2. same object as long as the app is running
+
+Where to use these scopes?
+for services and repositories

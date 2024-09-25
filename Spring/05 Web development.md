@@ -255,7 +255,7 @@ most commonly used lombok annotations
 6. @ToString
 7. @EqualsAndHashCode
 8. @Data -- shortcut that combines the features of 1, 2, 4, 6, 7  (Getter, Setter, ToString, RequiredArgsConstructor, EqualsAndHashCode)
-9. @Slf4j -- to ge tthe default logger for that class from the LoggerFactory, simply annotate the class and use the log object
+9. @Slf4j -- to get the default logger for that class from the LoggerFactory, simply annotate the class and use the log object
 
 The lombok magic is done during compile time
 ![[Pasted image 20240918100201.png]]
@@ -274,3 +274,39 @@ public class ContactController {
 
 }
 ```
+
+# Query Params
+http://localhost:8080/holidays?festival=true&federal=true
+```java
+@GetMapping("/holidays")
+public String displayHolidays(@RequestParam(required = false) boolean festival,
+							  @RequestParam(required = false) boolean federal){
+	//business logic
+	return "holidays.html";
+}
+
+```
+@RequestParam can be used to map either query params or form data
+
+the @RequestParam annotation supports name(for the name if the reques param to bind to), required, value(same as name) and defaultvalue(to handle nulls)
+
+if we dont use name attribute the parameter names must be the same as the params in the url
+##### sending query params from thymeleaf
+```html
+<a th:href="@{/holidays(festival='true',federal='true')}"></a>
+```
+
+# catch all route wildcard
+for urls like http://localhost:8080/holidays/all where our controller matches only the holidays in the url and the rest is considered path variables
+```java
+@GetMapping("/holidays/{type}")
+public String displayHolidays(@PathVariable String type){
+	return "holidas.html";
+}
+```
+
+in path variable as well we have attributes like name and required
+```html
+<a th:href="@{/holidays/federal}"></a>
+```
+
