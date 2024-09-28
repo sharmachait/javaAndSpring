@@ -114,10 +114,10 @@ using a Pojo class
 public class ContactViewModel{
 	private Strign name;
 	private Strign email;
-
+	
 	public getName(){return this.name;}
 	public setName(String name){this.name = name;}
-
+	
 	public getEmail(){return this.email;}
 	public setEmail(String email){this.email = email;}
 }
