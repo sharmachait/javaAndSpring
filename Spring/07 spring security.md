@@ -208,3 +208,20 @@ public class AuthController{
 	}
 }
 ```
+
+## RBAC
+
+```java
+@Configuration
+public class ZapierSecurityConfig {
+	@Bean
+	SecurityChainFilter defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+		
+		http
+			.csrf().ignoringRequestMatchers("/saveMsg")
+			.auhtorizeHttpRequests()
+			.requestMatchers("/displayMessages").hasRole("ADMIN");
+		return http.build();
+	}
+}
+```
