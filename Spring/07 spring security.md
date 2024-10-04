@@ -7,7 +7,7 @@ it gives us a default username and password that can be used to access all the p
 to configure custom starter credentials
 in the application.properties add
 ```
-spring.security.user.nqame = eazybytes
+spring.security.user.name = eazybytes
 spring.security.user.password = 12345
 ```
 when we do this any new password will not be logged
@@ -144,7 +144,7 @@ give the url where the login page should be and implement a controller for it
 @Configuration
 public class ZapierSecurityConfig {
 	@Bean
-	SecurityChainFilter defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		
 		http
 			.csrf().disable()
@@ -220,8 +220,20 @@ public class ZapierSecurityConfig {
 		http
 			.csrf().ignoringRequestMatchers("/saveMsg")
 			.auhtorizeHttpRequests()
+			.requestMatchers("/closeMsg/**").hasRole("ADMIN")
 			.requestMatchers("/displayMessages").hasRole("ADMIN");
 		return http.build();
 	}
+}
+```
+we used two ** becuase we are also expecting a request param after that
+
+to pass the data of the person invoking a method controller we can pass Authentication as a param to that method
+
+```java
+@RequestMapping(value = "/closeMsg", method = GET)
+public String closeMsg(@RequestParam int id, Authentication auth){
+	contactService.updateMsgStatus(id,atuh.getName());
+	return "redirect:/displayMessages";
 }
 ```

@@ -125,3 +125,30 @@ public class LoggerAspect{
 	}
 }
 ```
+
+# creating an aspect to log how much time each method took and another to log the error from each method
+```java
+@Slf4j
+@Aspect
+@Component
+public class LoggerAspect {
+	@Around("execution(* com.sharmachait.wazir..*.*(..))")
+	public Object log(ProceedingJoinPoint jp) throws throwable {
+		log.info(jp.getSignature().toString() + " method execution start");
+		Instant st = Instant.now();
+		
+		Object returnObj = jp.proceed(); // null if the method doesnt return anything
+		
+		Instant fin = Instant.now();
+		long timeElapsed = Duration.between(st,fin).toMillis();
+		log.info("Time took to execute " + jp.getSignature().toString() + " " + timeElapsed);
+		log.info(jp.getSignature().toString() + " method execution end");
+		
+		return returnObj;
+	}
+	@AfterThrowing(value = "execution(* com.sharmachait.wazir..*.*(..))")
+	public void logException(JoinPoint jp, Exception e){
+		log.error(jp.getSignature() + " an exception happened due to " + e.getMessage());
+	}
+}
+```
