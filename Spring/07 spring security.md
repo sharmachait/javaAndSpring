@@ -117,6 +117,7 @@ public class ZapierSecurityConfig {
 		
 		return http.build();
 	}
+	@Bean
 	public InMemoryUserDetailsManager userDetailsService(){
 		UserDetails user = User.withDefaultPasswordEndocer()
 								.username("user")
@@ -236,4 +237,77 @@ public String closeMsg(@RequestParam int id, Authentication auth){
 	contactService.updateMsgStatus(id,atuh.getName());
 	return "redirect:/displayMessages";
 }
+```
+
+# Database integration
+We can write custom logic to authentication user based on our requirements by implementing the AuthenticationProvider interface
+
+```java
+@Component
+public class UsernameAndPasswordAuthProvider implements AuthenticationProvider {
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	public Authentication authenticate(Authentication auth) throws AuthenticationException{
+		String name = auth.getName();
+		String password = auth.getCredentials.toString();
+		User user = userRepository.findByUsername(username);
+		if(ValidCredentials(name, password, user)){
+			return new UsernamePasswordAuthenticationToken(
+				name, passowrd, getGrantedAuthorities(user.getRoles())
+			);
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
+	public boolean supports(Class<?> auth){
+		return auth.equals(UsernamePasswordAuthenticationToken.class);
+	}
+	
+	public boolean ValidCredentials(String username, String password, User user){
+		
+		if(user==null)
+			return false;
+		if(user.getUsername().equals(username))
+			return false;
+		boolean passwordsEqual = comparePasswords(password,user.getPasswordHash());
+		if(!passwordsEqual)
+			return false;
+		return true;
+	}
+	
+	public boolean comparePasswords(String password, String hash){
+		
+	}
+	
+	public List<GrantedAuthorities> getGrantedAuthorities(Roles roles){
+		List<GrantedAuthorities> l = new ArrayList<>();
+		for(String role : roles.getRoles()){
+			l.add(new SimpleGrantedAuthority("ROLE_"+role));
+		}
+		return granted Authorities
+	}
+}
+```
+
+# password encoders
+### BcryptPasswordEncoder - most commonly used
+the PasswordEncoder interface has two methods 
+- encode(CharSequence rawPassword) and 
+- matcher(CharSequence rawPassword, String encodedPassword)
+stored password is never decoded
+
+step 1. Inject a bean of BcryptPasswordEncoder
+step 2. Use the bean to encode the password wherever we are saving it in the DB like the userService register method
+	encoder.encode(user.getPassword())
+step 3. use the bean in the auth provider to login the user  
+
+
+# all the annotation validations are done by spring framework and the data jpa as well
+## we can toggle the validations off when saving to database by
+```
+spring.jpa.properties.javax.persistence.validation.mode=none
 ```

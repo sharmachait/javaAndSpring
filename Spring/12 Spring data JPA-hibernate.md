@@ -339,9 +339,38 @@ public class FieldsValueMathValidator implements
 }
 ```
 
+to use this multi value custom validation
+```java
+@Data
+@Entity
+@FieldsValueMatch.List({
+	@FieldsValueMatch(
+		field = "password",
+		fieldMatch = "confirmPassword",
+		message = "Passwords do not match!"
+	),
+	@FieldsValueMatch(
+		field = "email",
+		fieldMatch = "confirmEmail",
+		message = "Emails do not match!"
+	)
+})
+public class User {
+	private String password;
+	@Transient
+	private String confirmPassword;
+	@Email
+	private String email;
+	@Email
+	@Transient
+	private String confirmEmail;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id
+}
+```
 
-
-
+@Transient is used to tell JPA that 
 
 
 

@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "5560442bf0ae0f9c",
+        "id": "87d7b6a739704951",
         "type": "tabs",
         "children": [
           {
-            "id": "7dc8ec1112ba7716",
+            "id": "a595deb10a7a7f66",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "Spring/07 spring security.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "Spring/07 spring security.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "Spring/07 spring security.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md"
+                "file": "Spring/07 spring security.md"
               }
             }
           }
@@ -146,41 +146,43 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e174e12d85b25c3",
+  "active": "a595deb10a7a7f66",
   "lastOpenFiles": [
-    "Spring/10. H2 database and JDBC.md",
-    "Spring/12 Spring data JPA-hibernate.md",
+    "Spring/13. Entity relationships.md",
     "Spring/07 spring security.md",
+    "Spring/12 Spring data JPA-hibernate.md",
+    "Spring/Dependency Injection/04 Autowiring.md",
+    "Spring/08 global error handling.md",
+    "Spring/11. database connection.md",
+    "Spring/10. H2 database and JDBC.md",
+    "Spring/02 Functional interfaces.md",
+    "Spring/01 Intro.md",
+    "Spring/Dependency Injection/02 Stereotypical bean.md",
+    "Spring/Dependency Injection/03 Programatically adding beans.md",
+    "Spring/Dependency Injection/05 Autowiring multiple objects of same type.md",
+    "Spring/Dependency Injection/06 Bean Scopes.md",
+    "Spring/Dependency Injection/01 Object registration in application context.md",
+    "01. Java for DSA.md",
+    "Untitled 1.md",
     "Spring/05 Web development.md",
     "Pasted image 20241002144050.png",
     "Pasted image 20241002144014.png",
     "Pasted image 20241002143707.png",
-    "Spring/11. database connection.md",
     "Spring/04 aspect oriented programming.md",
     "Spring/09 csrf.md",
     "Spring/06 Hibernate bean data validation.md",
-    "Spring/Dependency Injection/01 Object registration in application context.md",
-    "01. Java for DSA.md",
-    "Spring/08 global error handling.md",
     "concurrency/FUTURES.md",
     "concurrency/THREADS.md",
     "concurrency/Multitasking vs Multithreading.md",
-    "Spring/02 Functional interfaces.md",
     "Untitled.md",
     "Pasted image 20240926232440.png",
     "Pasted image 20240926120708.png",
-    "Spring/Dependency Injection/06 Bean Scopes.md",
     "Pasted image 20240920141309.png",
     "Pasted image 20240920141258.png",
     "Pasted image 20240920140209.png",
     "Pasted image 20240920135741.png",
-    "Spring/Dependency Injection/05 Autowiring multiple objects of same type.md",
-    "Spring/Dependency Injection/04 Autowiring.md",
     "Pasted image 20240918100201.png",
     "concurrency/Built in thread pool, CompletableFuture.md",
-    "Spring/Dependency Injection/03 Programatically adding beans.md",
-    "Spring/Dependency Injection/02 Stereotypical bean.md",
-    "Spring/01 Intro.md",
     "Spring/Dependency Injection",
     "Spring",
     "concurrency",
