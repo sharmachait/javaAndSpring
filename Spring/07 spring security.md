@@ -1,4 +1,7 @@
-![[Pasted image 20240926120708.png]]by simply adding this dependency spring security protects all the pages and redirects to /login for everything with a default login page
+![[Pasted image 20241012203444.png]]
+
+![[Pasted image 20240926120708.png]]
+by simply adding this dependency spring security protects all the pages and redirects to /login for everything with a default login page
 it gives us a default username and password that can be used to access all the pages
 
 ***==username - user==***
@@ -12,6 +15,8 @@ spring.security.user.password = 12345
 ```
 when we do this any new password will not be logged
 
+we also have a default logout page at /logout
+
 the default behaviour of spring security to authenticate all urls is configured in the SpringBootWebSecurityConfiguration class's defaultSecurityFilterChain(HttpSecurity http) method
 ```java
 @Bean
@@ -23,6 +28,7 @@ SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Excepti
 	return http.build();
 }
 ```
+
 
 ## customizing our SecurityChainFilter
 1. to make all urls public
@@ -133,7 +139,7 @@ public class ZapierSecurityConfig {
 		return new InMemoryUserDetailsManager(user, admin);
 	}
 }
-```
+``` 
 
 all these classes User UserDetails InMemoryUserDetailsManager are provided by the spring security framework
 this is called a builder pattern
