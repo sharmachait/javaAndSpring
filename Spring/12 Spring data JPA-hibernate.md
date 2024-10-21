@@ -290,7 +290,6 @@ public class PasswordStrengthValidator implements
 @PasswordValidator
 private String pwd;
 ```
-
 # another example, matching two fields like password and confirm password
 
 if we want to perform validations on two fields the field fieldMatch and the list are required
@@ -369,74 +368,59 @@ public class User {
 	private Long id
 }
 ```
-
 @Transient is used to tell JPA that 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# sorting
+two kinds of sorting supported by the spring data jpa
+1. static 
+```java
+List<Person> findByOrderByName();
+List<Person> findByOrderByNameDesc();
+```
+2. dynamic
+choosing dynamically at runtime what the data should be sorted on when fetching from the database
+send the Sort object as well
+```java
+Sort sort = Sort.by("name").descending().and(Sort.by("age").ascending());
+List<Courses> = coursesRepository.findAll(sort);
+```
+
+JPA will sort the data based on the sort object for us for the built in methods only that are being implemented by the spring data jpa 
+but for any custom methods in the repository methods we need to define them so that they expect a sort object
+```java
+public interface CoursesRepository extends JpaRepository<Courses, Long> {
+    List<Courses> findBySomeCriteria(String criteria, Sort sort);
+    List<Courses> findBySomeCriteria();
+}
+```
+the string criteria is a must have and it will not work without it
+the criteria will be used to filter and sort used to sort them
+# pagination
+use the Pageable Object like the sort object in the queries
+```java
+public interface PersonRepository extends JpaRepository<Courses, Long> {
+    Page<Person> findByName(String name,Pageable pageable);
+}
+
+Pageable pageable = PageRequest.of(0,5,Sort.by("name").desceding());
+Page<Person> personPage = personRepository.findByName("chaitanya", pageable);
+```
+
+where 0 is the start index of the first page and 5 is the number of records per page
+the personPage will have at max 5 entries and meta data about the page, like total number of records, number of pages, current page number and if next page is available   
+we can expect the start and the field that is name from the @RequestParams anbd show content dynamically
+# custom queries
+allowed using three annotations
+1. @Query - allows writing queries using JPQL or native SQL
+	1. when using native SQL we need to provide `@Query(nativeQuery = true)`
+2. @NamedQuery - used to maintain JPQL with names in a single place
+3. @NamedNativeQuery - used to maintain native SQL with names in a single place
+
+### jpql example
+```java
+@Query("SELECT c FROM Contact c WHERE c.containsId = ?1 ORDER BY c.createdAt DESC")
+List<Contact> findByIdOrderByCreatedDesc(Long id);
+```
+equivalent in derived methods would be
+```java
+List<Contact> findByContainsIdOrderByCreatedAtDesc(Long id);
+```
