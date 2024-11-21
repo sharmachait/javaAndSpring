@@ -310,3 +310,10 @@ in path variable as well we have attributes like name and required
 <a th:href="@{/holidays/federal}"></a>
 ```
 
+# when we create APIs with spring boot we obviously dont need a vew resolver
+![[Pasted image 20241022085400.png]]
+
+good idea to disable csrf for rest apis 
+
+# @RestController == @Controller + @ResponseBody
+

@@ -1,6 +1,7 @@
 JDBC still requires alot of boiler plate like with row mapper and  and passing all the parameters into the query and making prepared statements
 
 Spring data JPA is just specification (interface) hibernate is the implementation
+![[Pasted image 20241026110606.png]]
 ## important interfaces
 ### Repository - 
 its an empty interface
@@ -414,13 +415,249 @@ allowed using three annotations
 	1. when using native SQL we need to provide `@Query(nativeQuery = true)`
 2. @NamedQuery - used to maintain JPQL with names in a single place
 3. @NamedNativeQuery - used to maintain native SQL with names in a single place
-
+Named and NamedNative allow us to manage the queries in the entity class itself
 ### jpql example
+queries are written on the Entity instead of the table name
 ```java
 @Query("SELECT c FROM Contact c WHERE c.containsId = ?1 ORDER BY c.createdAt DESC")
 List<Contact> findByIdOrderByCreatedDesc(Long id);
 ```
+the ?1 is used to refer to the first parameter being passed to the method
 equivalent in derived methods would be
 ```java
 List<Contact> findByContainsIdOrderByCreatedAtDesc(Long id);
+```
+
+instead of using ?1 we can also use the name of the parameter directly
+```java
+@Query("SELECT c FROM c WHERE c.status = :status")
+Page<Contact> findByStatus(String status, Pageable pageable);
+```
+
+in Native Sql queries we have to use real table names instead of just the model names and also the real column names in the database instead of the field names of the entity class
+### update with custom queries
+to be able to update insert or delete records in the database with custom queries along with @Query annotation we also need to mention two other annotation
+1. @Transactional
+2. @Modifying
+```java
+@Modifying
+@Transactional
+@Query("UPDATE  Contact c SET c.status = ?1 WHERE c.contactId = ?2")
+int updateStatusById(String status, int id);
+```
+this will return the number of rows that were affected
+
+### NamedQuery & NamedNativeQuery
+Named and NamedNative allow us to manage the queries in the entity class itself
+the Name of the query is `<Name of Entity>.<Name of method in the repository>`
+```java
+@Entity
+@NamedQeury(name="Contact.findOpenMessages", query="SELECT c FROM Contact c WHERE c.status = :status")
+public class Contact extends BaseEntity{
+
+}
+```
+the NamedNativeQuery annotation also expects the resultClass as a parameter
+```java
+@Entity
+@NamedQeury(name="Contact.findOpenMessages", query="SELECT c FROM Contact c WHERE c.status = :status", resultClass = Contact.class)
+public class Contact extends BaseEntity{
+
+}
+```
+in case of named native query the method in the repository should also have the @query annotation with nativeQuery=true parameter
+```java
+@Query(nativeQuery = true)
+public Contact findOpenMessages(String status);
+```
+
+we can have multiple named queries and named native queries with
+![[Pasted image 20241022074030.png]]
+the methods in the repository can still expect pageable and sort objects as well if we use namedQueries
+but if we use named native queries, and want to use pageable as well then we need to write a named native query that counts the number of records for us as well
+
+```java
+@SqlResultSetMappings({
+@SqlResultSetMapping(name = "SqlResultSetMapping.count" columns = @ColumnResult(name = "cnt"))
+})
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "Contact.findOpenMessages",
+		query = "SELECT * FROM contact_msg c WHERE c.status = :status",
+		resultClass = Contact.class),
+	@NamedNativeQuery(name = "Contact.findOpenMessages.count",
+		query = "SELECT count(*) as cnt FROM contact_msg c WHERE c.status = :status",
+		resultSetMapping = "SqlResultSetMapping.count"),
+})
+public class Contact extends BaseEntity{
+
+}
+```
+where findOpenMessages should be a function  in the Repository that expects a Pageable
+
+# Entity Inheritance in DB
+
+Imagine a scenario where we have an entity that us resource but there are three kinds of resources, Audio Video and Text
+should we have three tables?
+should we have one table Resource with columns of all the properties? should we have a column that defined the type of resource we are working with?
+how to do that with JPA?
+
+![[Pasted image 20241026151958.png]]
+
+## single table strategy
+```java
+@Data
+@Entity
+@Inheritance
+@DiscriminatorColumn(name = "resource_type")
+public class Resource{
+	@Id
+	@Generated
+	private Long id;
+	private String name;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@DiscriminatorValue("Video")
+public class Video extends Resource{
+	private int length;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@DiscriminatorValue("File")
+public class File extends Resource{
+	private String type;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@DiscriminatorValue("Text")
+public class Text extends Resource{
+	private String content;
+}
+```
+
+this will create a single resource table in the database with three columns from the children entity as well, namely length type content
+to differentiate the rows of different types from each other we have the discriminator column
+we dont have to populate that value. Spring will do it for us. it will create a column named resource_type and populate the discriminator values for us, all we have to do is save a Video type object or file or text
+create repositories for the children classes not the parent
+
+## Join table strategy
+in this strategy each subclass will have its own table and have a foreign key into the resource table so that we can get the common values out from that table
+not suitable when we have to query the entire inheritance hierarchy all the time as joins are slow
+doesnt require discriminator column
+```java
+@Data
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Resource{
+	@Id
+	@Generated
+	private Long id;
+	private String name;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+public class Video extends Resource{
+	private int length;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+public class File extends Resource{
+	private String type;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+public class Text extends Resource{
+	private String content;
+}
+```
+
+and thats all we need to do
+now when ever we do something like videoRepository.save(video)
+it will run two inserts for us
+
+## separate table strategy
+3 tables for the 3 types are created
+with no common properties fetched out into a 4th table
+most efficient queries
+good for small number of types or sub classes
+```java
+@Data
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Resource{
+	@Id
+	@Generated
+	private Long id;
+	private String name;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+public class Video extends Resource{
+	private int length;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+public class File extends Resource{
+	private String type;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+public class Text extends Resource{
+	private String content;
+}
+```
+
+now if we query the resource repository it will create a union on all the tables and thats slow
+if we want only the columns related to the resource, and query on resource, we want to exclude Video, file and text from that query
+we can do that by mentioning `@Polymorphism(type = PolymorphismType.EXPLICIT)` on top of the sub classes
+
+# composite primary keys and embedded fields
+achieved via Embedded entities
+create a class OrderId.java and the columns in it will server as the primary key
+```java
+@Data
+@AllArgsContructor
+@NoArgsConstructor
+@Embeddable
+public class OrderId implements Serializable{
+	private String username;
+	private LocalDateTime orderDate;
+}
+
+@Data
+@AllArgsContructor
+@NoArgsConstructor
+@Entity
+public class Order {
+	@EmbeddedId
+	private OrderId id;
+	private String orderInfo;
+	@Embedded
+	private OtherProperties;
+}
+@Embeddable
+public class OtherProperties{
+
+}
 ```

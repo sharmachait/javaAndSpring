@@ -146,9 +146,11 @@ public class LoggerAspect {
 		
 		return returnObj;
 	}
+	
 	@AfterThrowing(value = "execution(* com.sharmachait.wazir..*.*(..))")
 	public void logException(JoinPoint jp, Exception e){
 		log.error(jp.getSignature() + " an exception happened due to " + e.getMessage());
 	}
+	
 }
 ```

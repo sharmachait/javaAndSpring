@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "6b6b7c80869f48e8",
+        "id": "3dd5aba00bfddbf9",
         "type": "tabs",
         "children": [
           {
-            "id": "1519c34356957c55",
+            "id": "8a003e4603a436de",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "JUnit and Mockito/05. Testing Rest controllers.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12 Spring data JPA-hibernate"
+              "title": "05. Testing Rest controllers"
+            }
+          },
+          {
+            "id": "868258071c01cf44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02. Kubernetes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02. Kubernetes"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -93,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "Spring/12.2 hibernate.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 12 Spring data JPA-hibernate"
+              "title": "Backlinks for 12.2 hibernate"
             }
           },
           {
@@ -112,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md",
+                "file": "Spring/12.2 hibernate.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 12 Spring data JPA-hibernate"
+              "title": "Outgoing links from 12.2 hibernate"
             }
           },
           {
@@ -139,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/12 Spring data JPA-hibernate.md"
+                "file": "Spring/12.2 hibernate.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 12 Spring data JPA-hibernate"
+              "title": "Outline of 12.2 hibernate"
             }
           }
         ]
@@ -162,44 +177,45 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1519c34356957c55",
+  "active": "868258071c01cf44",
   "lastOpenFiles": [
+    "JUnit and Mockito/01. JUnit.md",
+    "JUnit and Mockito/05. Testing Rest controllers.md",
+    "JUnit and Mockito/02. mockito.md",
+    "01. Java for DSA.md",
+    "JUnit and Mockito/04. code coverage report.md",
+    "JUnit and Mockito/03. unit testing report.md",
+    "Pasted image 20240908114859.png",
+    "image.png",
+    "Java for DSA.md",
+    "image 1.png",
+    "image 2.png",
+    "Pasted image 20241114005212.png",
+    "Pasted image 20241114005138.png",
+    "Pasted image 20241114005117.png",
+    "Pasted image 20241114005051.png",
     "Spring/14. Security API.md",
+    "Spring/15. CORS.md",
+    "02. Kubernetes.md",
+    "Spring/10. H2 database and JDBC.md",
     "Spring/05 Web development.md",
     "Spring/13. Entity relationships.md",
-    "Spring/07 spring security.md",
-    "Spring/Dependency Injection/01 Object registration in application context.md",
-    "Pasted image 20241012203444.png",
-    "Spring/04 aspect oriented programming.md",
-    "Spring/12 Spring data JPA-hibernate.md",
-    "Spring/Dependency Injection/04 Autowiring.md",
-    "Spring/08 global error handling.md",
-    "Spring/11. database connection.md",
-    "Spring/10. H2 database and JDBC.md",
-    "Spring/02 Functional interfaces.md",
-    "Spring/01 Intro.md",
-    "Spring/Dependency Injection/02 Stereotypical bean.md",
-    "Spring/Dependency Injection/03 Programatically adding beans.md",
-    "Spring/Dependency Injection/05 Autowiring multiple objects of same type.md",
-    "Spring/Dependency Injection/06 Bean Scopes.md",
-    "01. Java for DSA.md",
-    "Untitled 1.md",
-    "Pasted image 20241002144050.png",
-    "Pasted image 20241002144014.png",
-    "Pasted image 20241002143707.png",
-    "Spring/09 csrf.md",
-    "Spring/06 Hibernate bean data validation.md",
-    "concurrency/FUTURES.md",
-    "concurrency/THREADS.md",
-    "concurrency/Multitasking vs Multithreading.md",
-    "Untitled.md",
-    "Pasted image 20240926232440.png",
-    "Pasted image 20240926120708.png",
-    "Pasted image 20240920141309.png",
-    "Pasted image 20240920141258.png",
-    "Pasted image 20240920140209.png",
-    "Pasted image 20240920135741.png",
+    "Pasted image 20241112000301.png",
+    "Pasted image 20241112000242.png",
+    "Spring/18. properties and logging.md",
+    "JUnit and Mockito",
     "concurrency/Built in thread pool, CompletableFuture.md",
+    "Spring/07 spring security.md",
+    "Spring/19. OAUTH.md",
+    "Spring/06 Hibernate bean data validation.md",
+    "Spring/12.2 hibernate.md",
+    "Spring/12 Spring data JPA-hibernate.md",
+    "Spring/11. database connection.md",
+    "Spring/04 aspect oriented programming.md",
+    "Spring/17. interservice communication.md",
+    "Spring/Dependency Injection/04 Autowiring.md",
+    "Spring/16. JSON serialization.md",
+    "Spring/08 global error handling.md",
     "Spring/Dependency Injection",
     "Spring",
     "concurrency"

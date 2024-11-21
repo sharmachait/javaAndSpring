@@ -1,3 +1,4 @@
+# MVC
 @ControllerAdvice - specialized @Component, used to create interceptors of requests
 @ExceptionHandler
 
@@ -34,3 +35,28 @@ public class ExceptionHandlingAspect {
 ```
 
 if @ExceptionHandler method is defined inside a controller then that method to handle exceptions is applicable to only the methods in that class
+
+# API
+```java
+@Slf4j
+@RestControllerAdvice
+public class GlobalApiExceptionHandler 
+	extends ResponseEntityExceptionHandler {
+	
+	@Override
+	protected ResponseEntity<Object> handlerMethodArgumentsNotValid(
+		MethodArgumentNotValidException ex
+		, HttpHeaders headers
+		, HttpStatus status
+		, WebRequest req){
+		String res = ex.getBindingResult().toString();
+		return new ResponseEntity(res, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({Exception.class})
+	public ResponseEntity<String> exceptionHandler(Exception exp){
+		return new ResponseEntity(exp.getMessage()
+			,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
+```
