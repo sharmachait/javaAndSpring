@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/01. Kubernetes.md",
+                "file": "Spring-Websockets/Broker.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01. Kubernetes"
+              "title": "Broker"
             }
           }
         ]
@@ -164,10 +164,12 @@
   },
   "active": "d7fb0f9e70b644ff",
   "lastOpenFiles": [
+    "kubernetes/01. Kubernetes.md",
+    "Spring-Websockets/Broker.md",
+    "Spring-Websockets",
     "Pasted image 20241128102505.png",
     "Pasted image 20241128081003.png",
     "kubernetes/00. KIND.md",
-    "kubernetes/01. Kubernetes.md",
     "01. Java for DSA.md",
     "Saga + Clean + DDD +CQRS/Saga.md",
     "Pasted image 20241127125038.png",
@@ -189,7 +191,6 @@
     "Spring/14. Security API.md",
     "Spring/17. interservice communication.md",
     "Spring/18. properties and logging.md",
-    "Pasted image 20241122222107.png",
     "JUnit and Mockito/02. mockito.md",
     "JUnit and Mockito/04. code coverage report.md",
     "JUnit and Mockito/03. unit testing report.md",
