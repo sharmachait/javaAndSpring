@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring-Websockets/Broker.md",
+                "file": "kubernetes/00. KIND.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Broker"
+              "title": "00. KIND"
             }
           }
         ]
@@ -164,12 +164,14 @@
   },
   "active": "d7fb0f9e70b644ff",
   "lastOpenFiles": [
+    "Spring-Websockets/Untitled.md",
     "kubernetes/01. Kubernetes.md",
+    "Pasted image 20241129004654.png",
+    "kubernetes/00. KIND.md",
     "Spring-Websockets/Broker.md",
     "Spring-Websockets",
     "Pasted image 20241128102505.png",
     "Pasted image 20241128081003.png",
-    "kubernetes/00. KIND.md",
     "01. Java for DSA.md",
     "Saga + Clean + DDD +CQRS/Saga.md",
     "Pasted image 20241127125038.png",
@@ -182,7 +184,6 @@
     "Pasted image 20241126132320.png",
     "Pasted image 20241126014658.png",
     "Pasted image 20241126013050.png",
-    "Pasted image 20241126012837.png",
     "JUnit and Mockito/07. Testing JPA repositories.md",
     "JUnit and Mockito/06. Testing JPA entities.md",
     "Spring/12 Spring data JPA-hibernate.md",
@@ -204,7 +205,6 @@
     "Spring/07 spring security.md",
     "Spring/19. OAUTH.md",
     "Spring/06 Hibernate bean data validation.md",
-    "Spring/12.2 hibernate.md",
     "Spring/Dependency Injection",
     "Spring",
     "concurrency"
