@@ -6,11 +6,12 @@ use endpoint wss for secure ssl endpoints
 @Configuration  
 @EnableWebSocketMessageBroker  
 public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {  
-  
     @Override  
-    public void registerStompEndpoints(StompEndpointRegistry registry) {  
-        registry.addEndpoint("/ws").withSockJS();  
-    }  
+	public void registerStompEndpoints(StompEndpointRegistry registry) {  
+		registry.addEndpoint("/ws")  
+		.setAllowedOriginPatterns("*")  
+		.withSockJS();  
+	}
   
     @Override  
     public void configureMessageBroker(MessageBrokerRegistry registry) {  
@@ -27,32 +28,6 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
 - Activates a simple in-memory message broker that handles broadcasting messages to subscribers.
 - Messages sent to destinations starting with `/topic` are routed through this broker.
 - For example, if a client subscribes to `/topic/updates`, they receive messages published to that destination.
-```javascript
-import SockJS from 'sockjs-client'; // Import SockJS client 
-import Stomp from '@stomp/stompjs'; // Import STOMP client
-
-const socket = new SockJS('/ws'); // Establish connection with the server
-const stompClient = Stomp.over(socket); // Use STOMP over WebSocket
-
-stompClient.connect({}, function (frame) {
-    console.log('Connected: ' + frame);
-});
-
-stompClient.subscribe('/topic/updates', function (message) {
-    const content = JSON.parse(message.body); // Parse the incoming message
-    console.log('Received update:', content); // Handle the message
-});
-```
-
-```java
-@Autowired
-private SimpMessagingTemplate messagingTemplate;
-
-@PostMapping("/sendUpdate")
-public void sendUpdate(@RequestBody Update update) {
-    messagingTemplate.convertAndSend("/topic/updates", update);
-}
-```
 
 next thing we will have to configure event listeners to handle leaving the chat etc
 
@@ -83,25 +58,49 @@ next we have to create websocket controller where we use MessageMapping instead 
 we also define here which topic or queue to redirect the message to
 ```java
 public class ChatController {  
-    @MessageMapping("/chat/message")  
+    @MessageMapping("/chat/message")//app/chat/message
     @SendTo("/topic/public")  
     public ChatMessage sendMessage(  
             @Payload ChatMessage message  
     ) {  
         return message;  
     }  
+    @MessageMapping("/chat/join")  //app/chat/join
+	@SendTo("/topic/public")  
+	public ChatMessage addMessage(  
+	        @Payload ChatMessage message,  
+	        SimpMessageHeaderAccessor headerAccessor  
+	) {  
+	    headerAccessor.getSessionAttributes().put("username", message.getSender());  
+	    return message;  
+	}
 }
 ```
 to play around with headers of the STOMP protocol message use **`SimpMessageHeaderAccessor`**
 for something like add user to the session
-```java
-@MessageMapping("/chat/join")  
-@SendTo("/topic/public")  
-public ChatMessage addMessage(  
-        @Payload ChatMessage message,  
-        SimpMessageHeaderAccessor headerAccessor  
-) {  
-    headerAccessor.getSessionAttributes().put("username", message.getSender());  
-    return message;  
-}
+
+connecting to the broker and sending messages from the frontend
+```javascript
+import SockJS from 'sockjs-client'; // Import SockJS client 
+import Stomp from '@stomp/stompjs'; // Import STOMP client
+
+const socket = new SockJS('/ws'); // Establish connection with the server
+const stompClient = Stomp.over(socket); // Use STOMP over WebSocket
+
+stompClient.connect({}, function (frame) {
+    console.log('Connected: ' + frame);
+	const chatMessage = { 
+		sender: 'YourUsername', // Replace with the sender's username 
+		content: 'Hello, World!', // Replace with your message content 
+		type: 'CHAT' // Optional: Use a type if needed 
+	};
+	stompClient.send('/app/chat/join', {}, JSON.stringify(chatMessage));
+	
+	stompClient.send('/app/chat/message', {}, JSON.stringify(chatMessage));
+});
+
+stompClient.subscribe('/topic/updates', function (message) {
+    const content = JSON.parse(message.body); // Parse the incoming message
+    console.log('Received update:', content); // Handle the message
+});
 ```
