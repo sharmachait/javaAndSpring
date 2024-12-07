@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JUnit and Mockito/07. Testing JPA repositories.md",
+                "file": "JUnit and Mockito/01. JUnit.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "07. Testing JPA repositories"
+              "title": "01. JUnit"
             }
           }
         ]
@@ -162,22 +162,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b7735a6ed4674054",
+  "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
+    "JUnit and Mockito/02. mockito.md",
+    "JUnit and Mockito/01. JUnit.md",
+    "concurrency/FUTURES.md",
+    "Spring/02 Functional interfaces.md",
+    "kubernetes/04. Secrets, Configmaps and volumes.md",
+    "Pasted image 20241207230228.png",
+    "kubernetes/02. Services and ingress.md",
+    "kubernetes/01. Pods and Deployments.md",
+    "kubernetes/00. KIND.md",
+    "Spring/13. Entity relationships.md",
+    "JUnit and Mockito/07. Testing JPA repositories.md",
     "JUnit and Mockito/06. Testing JPA entities.md",
     "JUnit and Mockito/05. Testing Rest controllers.md",
     "JUnit and Mockito/04. code coverage report.md",
     "JUnit and Mockito/03. unit testing report.md",
-    "JUnit and Mockito/02. mockito.md",
-    "JUnit and Mockito/01. JUnit.md",
     "Spring/20. security setup steps.md",
-    "kubernetes/01. Pods and Deployments.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
-    "kubernetes/Untitled.md",
     "Spring/15. CORS.md",
     "Spring/14. Security API.md",
-    "kubernetes/02. Services and ingress.md",
-    "kubernetes/00. KIND.md",
     "Untitled.md",
     "01. Java for DSA.md",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
@@ -196,14 +201,9 @@
     "Pasted image 20241127000045.png",
     "Pasted image 20241126132320.png",
     "Pasted image 20241126014658.png",
-    "Pasted image 20241126013050.png",
-    "JUnit and Mockito/07. Testing JPA repositories.md",
     "Spring/12 Spring data JPA-hibernate.md",
     "Spring/17. interservice communication.md",
     "Spring/18. properties and logging.md",
-    "Java for DSA.md",
-    "Spring/10. H2 database and JDBC.md",
-    "Spring/05 Web development.md",
     "JUnit and Mockito",
     "Spring/Dependency Injection",
     "Spring",
