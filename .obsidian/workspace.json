@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/04. Secrets, Configmaps and volumes.md",
+                "file": "JUnit and Mockito/05. Testing Rest controllers.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04. Secrets, Configmaps and volumes"
+              "title": "05. Testing Rest controllers"
             }
           }
         ]
@@ -162,11 +162,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b7735a6ed4674054",
+  "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
+    "kubernetes/04. Secrets, Configmaps and volumes.md",
     "Pasted image 20241208210426.png",
     "kubernetes/02. Services and ingress.md",
-    "kubernetes/04. Secrets, Configmaps and volumes.md",
     "Spring/20. security setup steps.md",
     "JUnit and Mockito/05. Testing Rest controllers.md",
     "JUnit and Mockito/01. JUnit.md",
@@ -201,7 +201,6 @@
     "Pasted image 20241127005515.png",
     "Pasted image 20241127000045.png",
     "Pasted image 20241126132320.png",
-    "Pasted image 20241126014658.png",
     "Spring/12 Spring data JPA-hibernate.md",
     "Spring/17. interservice communication.md",
     "JUnit and Mockito",
