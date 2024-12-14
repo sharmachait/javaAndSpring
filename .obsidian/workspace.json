@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/04. Secrets, Configmaps and volumes.md",
+                "file": "kubernetes/05. volumes and persistent volumes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04. Secrets, Configmaps and volumes"
+              "title": "05. volumes and persistent volumes"
             }
           }
         ]
@@ -162,30 +162,32 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b7735a6ed4674054",
+  "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
-    "kubernetes/05. volumes and persistent volumes.md",
+    "kubernetes/06. Multi container pods.md",
+    "kubernetes/02. Services and ingress.md",
     "kubernetes/01. Pods and Deployments.md",
+    "kubernetes/00. KIND.md",
+    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
+    "kubernetes/05. volumes and persistent volumes.md",
+    "Untitled.md",
+    "Untitled 1.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
     "JUnit and Mockito/05. Testing Rest controllers.md",
     "Pasted image 20241208210426.png",
-    "kubernetes/02. Services and ingress.md",
     "Spring/20. security setup steps.md",
     "JUnit and Mockito/01. JUnit.md",
     "JUnit and Mockito/02. mockito.md",
     "concurrency/FUTURES.md",
     "Spring/02 Functional interfaces.md",
     "Pasted image 20241207230228.png",
-    "kubernetes/00. KIND.md",
     "Spring/13. Entity relationships.md",
     "JUnit and Mockito/07. Testing JPA repositories.md",
     "JUnit and Mockito/06. Testing JPA entities.md",
     "JUnit and Mockito/04. code coverage report.md",
     "JUnit and Mockito/03. unit testing report.md",
-    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "Spring/15. CORS.md",
     "Spring/14. Security API.md",
-    "Untitled.md",
     "01. Java for DSA.md",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Spring-Websockets/Broker.md",
@@ -202,8 +204,6 @@
     "Pasted image 20241127005515.png",
     "Pasted image 20241127000045.png",
     "Pasted image 20241126132320.png",
-    "Spring/12 Spring data JPA-hibernate.md",
-    "Spring/17. interservice communication.md",
     "JUnit and Mockito",
     "Spring/Dependency Injection",
     "Spring",
