@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/05. volumes and persistent volumes.md",
+                "file": "kubernetes/07. Horizontal Pod Autoscaling.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "05. volumes and persistent volumes"
+              "title": "07. Horizontal Pod Autoscaling"
             }
           }
         ]
@@ -162,14 +162,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e174e12d85b25c3",
+  "active": "b7735a6ed4674054",
   "lastOpenFiles": [
+    "Pasted image 20241217091303.png",
+    "kubernetes/05. volumes and persistent volumes.md",
+    "kubernetes/07. Horizontal Pod Autoscaling.md",
     "kubernetes/06. Multi container pods.md",
     "kubernetes/02. Services and ingress.md",
     "kubernetes/01. Pods and Deployments.md",
     "kubernetes/00. KIND.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
-    "kubernetes/05. volumes and persistent volumes.md",
     "Untitled.md",
     "Untitled 1.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
@@ -191,12 +193,10 @@
     "01. Java for DSA.md",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Spring-Websockets/Broker.md",
-    "Spring-Websockets/chat app.md",
     "Pasted image 20241129004654.png",
     "Spring-Websockets",
     "Pasted image 20241128102505.png",
     "Pasted image 20241128081003.png",
-    "Saga + Clean + DDD +CQRS/Saga.md",
     "Pasted image 20241127125038.png",
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
