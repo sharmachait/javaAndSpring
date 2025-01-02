@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/16. Helm.md",
+                "file": "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "16. Helm"
+              "title": "16. logging, monitoring and readiness+liveness probes"
             }
           }
         ]
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "lifecy",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -165,10 +165,11 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "Pasted image 20250102122206.png",
     "kubernetes/15. Multi container pods.md",
+    "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
+    "kubernetes/20. Helm.md",
+    "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
-    "kubernetes/16. Helm.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "Pasted image 20241231100323.png",
     "kubernetes/02. Services and ingress.md",
@@ -204,7 +205,6 @@
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
     "Pasted image 20241127020221.png",
-    "Pasted image 20241127005515.png",
     "JUnit and Mockito",
     "Spring/Dependency Injection",
     "Spring",
