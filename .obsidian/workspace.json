@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5
+    "width": 406.51103591918945
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -163,7 +163,7 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "033826ff3cb88d23",
+  "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
     "kubernetes/15. Multi container pods.md",
     "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
