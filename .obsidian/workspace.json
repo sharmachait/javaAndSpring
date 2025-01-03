@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 406.51103591918945
+    "width": 200
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -165,8 +165,9 @@
   },
   "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
-    "kubernetes/15. Multi container pods.md",
+    "kubernetes/00. KIND.md",
     "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
+    "kubernetes/15. Multi container pods.md",
     "kubernetes/20. Helm.md",
     "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
@@ -184,7 +185,6 @@
     "kubernetes/07. Horizontal Pod Autoscaling.md",
     "kubernetes/06. Multi container pods.md",
     "kubernetes/05. volumes and persistent volumes.md",
-    "kubernetes/00. KIND.md",
     "kubernetes/14. Taints and Tolerations vs Selectors and Affinity.md",
     "kubernetes/13. Node Selectors and Node Affinity.md",
     "kubernetes/12. Taints and tolerations.md",
