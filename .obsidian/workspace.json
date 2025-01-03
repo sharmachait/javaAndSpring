@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
+                "file": "kubernetes/01.02 Deployments.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "16. logging, monitoring and readiness+liveness probes"
+              "title": "01.02 Deployments"
             }
           }
         ]
@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "lifecy",
+                "query": "annotation",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 227.51103591918945
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -163,19 +163,21 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "8e174e12d85b25c3",
+  "active": "033826ff3cb88d23",
   "lastOpenFiles": [
+    "kubernetes/01.01 labels and selectors.md",
+    "kubernetes/01.02 Deployments.md",
+    "kubernetes/02. Services and ingress.md",
+    "kubernetes/01. Pods and Deployments.md",
+    "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/00. KIND.md",
-    "kubernetes/16. logging, monitoring and readiness+liveness probes.md",
     "kubernetes/15. Multi container pods.md",
     "kubernetes/20. Helm.md",
     "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "Pasted image 20241231100323.png",
-    "kubernetes/02. Services and ingress.md",
     "02. Docker.md",
-    "kubernetes/01. Pods and Deployments.md",
     "kubernetes/0000. Vim.md",
     "Spring/Dependency Injection/06 Bean Scopes.md",
     "kubernetes/11. resource requests, limits and quotas.md",
@@ -193,8 +195,6 @@
     "Untitled 1.md",
     "JUnit and Mockito/05. Testing Rest controllers.md",
     "Pasted image 20241208210426.png",
-    "Spring/20. security setup steps.md",
-    "JUnit and Mockito/01. JUnit.md",
     "Pasted image 20241207230228.png",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Pasted image 20241129004654.png",
