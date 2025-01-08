@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/01.03 Jobs and CronJobs.md",
+                "file": "kubernetes/02. Services and ingress.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01.03 Jobs and CronJobs"
+              "title": "02. Services and ingress"
             }
           }
         ]
@@ -165,8 +165,12 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "kubernetes/01.04 Stateful sets.md",
+    "Pasted image 20250108012446.png",
+    "Pasted image 20250108004314.png",
+    "kubernetes/00. KIND.md",
     "kubernetes/02. Services and ingress.md",
+    "kubernetes/01.03 Jobs and CronJobs.md",
+    "kubernetes/01.04 Stateful sets.md",
     "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/05. volumes and persistent volumes.md",
     "Untitled.md",
@@ -179,8 +183,6 @@
     "kubernetes/01.01 labels and selectors.md",
     "kubernetes/01. Pods and Deployments.md",
     "kubernetes/20. Helm.md",
-    "kubernetes/01.03 Jobs and CronJobs.md",
-    "kubernetes/00. KIND.md",
     "kubernetes/15. Multi container pods.md",
     "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
@@ -192,7 +194,6 @@
     "kubernetes/09. security context.md",
     "kubernetes/07. Horizontal Pod Autoscaling.md",
     "kubernetes/06. Multi container pods.md",
-    "kubernetes/14. Taints and Tolerations vs Selectors and Affinity.md",
     "Pasted image 20241217091303.png",
     "Pasted image 20241208210426.png",
     "Pasted image 20241207230228.png",
@@ -204,7 +205,6 @@
     "Pasted image 20241127125038.png",
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
-    "Pasted image 20241127020221.png",
     "JUnit and Mockito",
     "Spring/Dependency Injection",
     "Spring",
