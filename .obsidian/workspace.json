@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/02. Services and ingress.md",
+                "file": "kubernetes/20. Helm.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02. Services and ingress"
+              "title": "20. Helm"
             }
           }
         ]
@@ -139,13 +139,24 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/12.2 hibernate.md"
+                "file": "kubernetes/20. Helm.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 12.2 hibernate"
+              "title": "Outline of 20. Helm"
+            }
+          },
+          {
+            "id": "7623f8f27353aac1",
+            "type": "leaf",
+            "state": {
+              "type": "mermaid-toolbar-view",
+              "state": {},
+              "icon": "trident-custom",
+              "title": "Mermaid Toolbar"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -165,19 +176,20 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
+    "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
+    "kubernetes/02.01 Network policies.md",
+    "kubernetes/02. Services and ingress.md",
+    "kubernetes/08. Imperative commands.md",
     "Pasted image 20250108012446.png",
     "Pasted image 20250108004314.png",
     "kubernetes/00. KIND.md",
-    "kubernetes/02. Services and ingress.md",
     "kubernetes/01.03 Jobs and CronJobs.md",
     "kubernetes/01.04 Stateful sets.md",
-    "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/05. volumes and persistent volumes.md",
     "Untitled.md",
     "kubernetes/01.02 Deployments.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "02. Docker.md",
-    "kubernetes/08. Imperative commands.md",
     "Spring/Dependency Injection/07 best practices.md",
     "Spring/10. H2 database and JDBC.md",
     "kubernetes/01.01 labels and selectors.md",
@@ -202,7 +214,6 @@
     "Spring-Websockets",
     "Pasted image 20241128102505.png",
     "Pasted image 20241128081003.png",
-    "Pasted image 20241127125038.png",
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
     "JUnit and Mockito",
