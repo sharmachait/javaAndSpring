@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/20. Helm.md",
+                "file": "kubernetes/17. Helm.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "20. Helm"
+              "title": "17. Helm"
             }
           }
         ]
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "kubernetes/20. Helm.md"
+                "file": "kubernetes/17. Helm.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 20. Helm"
+              "title": "Outline of 17. Helm"
             }
           },
           {
@@ -176,9 +176,10 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
+    "kubernetes/02. Services and ingress.md",
+    "kubernetes/17. Helm.md",
     "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/02.01 Network policies.md",
-    "kubernetes/02. Services and ingress.md",
     "kubernetes/08. Imperative commands.md",
     "Pasted image 20250108012446.png",
     "Pasted image 20250108004314.png",
@@ -194,7 +195,6 @@
     "Spring/10. H2 database and JDBC.md",
     "kubernetes/01.01 labels and selectors.md",
     "kubernetes/01. Pods and Deployments.md",
-    "kubernetes/20. Helm.md",
     "kubernetes/15. Multi container pods.md",
     "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
