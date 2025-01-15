@@ -52,7 +52,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "set-c",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 225.51103591918945
+    "width": 277.51103591918945
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -174,10 +174,11 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "033826ff3cb88d23",
+  "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
-    "kubernetes/17. Helm.md",
+    "kubernetes/01. Pods and Deployments.md",
     "kubernetes/18. Security.md",
+    "kubernetes/17. Helm.md",
     "kubernetes/02. Services and ingress.md",
     "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/02.01 Network policies.md",
@@ -195,7 +196,6 @@
     "Spring/Dependency Injection/07 best practices.md",
     "Spring/10. H2 database and JDBC.md",
     "kubernetes/01.01 labels and selectors.md",
-    "kubernetes/01. Pods and Deployments.md",
     "kubernetes/15. Multi container pods.md",
     "Pasted image 20250102122206.png",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
