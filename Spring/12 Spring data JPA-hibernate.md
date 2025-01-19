@@ -1,3 +1,5 @@
+# hibernate required a no args constructor to work properly with entities
+
 JDBC still requires alot of boiler plate like with row mapper and  and passing all the parameters into the query and making prepared statements
 
 Spring data JPA is just specification (interface) hibernate is the implementation
