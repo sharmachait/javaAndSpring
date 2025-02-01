@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
+                "file": "Spring/12.1 hibernate jpa jdbc best practices.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0000. Vim + shell + kubectl shortcuts"
+              "title": "12.1 hibernate jpa jdbc best practices"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -176,8 +177,9 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "Spring/12.1 hibernate jpa jdbc best practices.md",
     "Spring/12 Spring data JPA-hibernate.md",
+    "Spring/12.1 hibernate jpa jdbc best practices.md",
+    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
     "kubernetes/20. Custom resource definition.md",
     "kubernetes/19. Admission controllers.md",
     "kubernetes/18. Security.md",
@@ -191,7 +193,6 @@
     "JUnit and Mockito/06. Testing JPA entities.md",
     "kubernetes/07. Horizontal Pod Autoscaling.md",
     "kubernetes/17. Helm.md",
-    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
     "Pasted image 20250116004010.png",
     "kubernetes/01. Pods and Deployments.md",
     "JUnit and Mockito/01. JUnit.md",
