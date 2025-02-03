@@ -658,6 +658,7 @@ public class Order {
 	@Embedded
 	private OtherProperties;
 }
+
 @Embeddable
 public class OtherProperties{
 

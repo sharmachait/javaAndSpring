@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/12.1 hibernate jpa jdbc best practices.md",
+                "file": "kubernetes/01. Pods and Deployments.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12.1 hibernate jpa jdbc best practices"
+              "title": "01. Pods and Deployments"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "embe",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -177,35 +177,35 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "Spring/12 Spring data JPA-hibernate.md",
-    "Spring/12.1 hibernate jpa jdbc best practices.md",
+    "kubernetes/08. Imperative commands.md",
     "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
+    "kubernetes/01. Pods and Deployments.md",
+    "Spring/12.2 DAO pattern with jdbc.md",
+    "kubernetes/00. KIND.md",
+    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
+    "Spring/12 Spring data JPA-hibernate.md",
+    "Spring/13. Entity relationships.md",
+    "Spring/12.1 hibernate jpa jdbc best practices.md",
+    "Spring/11. database connection.md",
+    "Spring/10. H2 database and JDBC.md",
     "kubernetes/20. Custom resource definition.md",
     "kubernetes/19. Admission controllers.md",
     "kubernetes/18. Security.md",
     "kubernetes/09. security context.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
-    "kubernetes/00. KIND.md",
-    "Spring/13. Entity relationships.md",
     "Spring/14. Security API.md",
-    "Spring/11. database connection.md",
-    "Spring/10. H2 database and JDBC.md",
     "JUnit and Mockito/06. Testing JPA entities.md",
     "kubernetes/07. Horizontal Pod Autoscaling.md",
     "kubernetes/17. Helm.md",
     "Pasted image 20250116004010.png",
-    "kubernetes/01. Pods and Deployments.md",
     "JUnit and Mockito/01. JUnit.md",
     "kubernetes/02. Services and ingress.md",
     "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
     "kubernetes/02.01 Network policies.md",
-    "kubernetes/08. Imperative commands.md",
     "Pasted image 20250108012446.png",
     "Pasted image 20250108004314.png",
     "kubernetes/01.03 Jobs and CronJobs.md",
     "kubernetes/01.04 Stateful sets.md",
-    "kubernetes/05. volumes and persistent volumes.md",
-    "Untitled.md",
     "Pasted image 20250102122206.png",
     "Pasted image 20241231100323.png",
     "Pasted image 20241217091303.png",
