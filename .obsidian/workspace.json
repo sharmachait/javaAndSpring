@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/01. Pods and Deployments.md",
+                "file": "kubernetes/01.04 Stateful sets.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01. Pods and Deployments"
+              "title": "01.04 Stateful sets"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "embe",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -177,11 +177,16 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "kubernetes/08. Imperative commands.md",
-    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
+    "kubernetes/01.03 Jobs and CronJobs.md",
+    "kubernetes/09. security context.md",
+    "kubernetes/01.02 Deployments strategies.md",
     "kubernetes/01. Pods and Deployments.md",
+    "kubernetes/01.01 labels and selectors.md",
+    "kubernetes/08. Imperative commands.md",
     "Spring/12.2 DAO pattern with jdbc.md",
+    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
     "kubernetes/00. KIND.md",
+    "kubernetes/10. service acounts.md",
     "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "Spring/12 Spring data JPA-hibernate.md",
     "Spring/13. Entity relationships.md",
@@ -191,7 +196,6 @@
     "kubernetes/20. Custom resource definition.md",
     "kubernetes/19. Admission controllers.md",
     "kubernetes/18. Security.md",
-    "kubernetes/09. security context.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
     "Spring/14. Security API.md",
     "JUnit and Mockito/06. Testing JPA entities.md",
@@ -200,12 +204,8 @@
     "Pasted image 20250116004010.png",
     "JUnit and Mockito/01. JUnit.md",
     "kubernetes/02. Services and ingress.md",
-    "kubernetes/16. readiness+liveness probes and logging+monitoring.md",
-    "kubernetes/02.01 Network policies.md",
     "Pasted image 20250108012446.png",
     "Pasted image 20250108004314.png",
-    "kubernetes/01.03 Jobs and CronJobs.md",
-    "kubernetes/01.04 Stateful sets.md",
     "Pasted image 20250102122206.png",
     "Pasted image 20241231100323.png",
     "Pasted image 20241217091303.png",
