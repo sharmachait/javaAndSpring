@@ -371,7 +371,7 @@ public class User {
 	private Long id
 }
 ```
-@Transient is used to tell JPA that 
+@Transient is used to tell JPA that a field or property in an entity that should not be persisted to the database
 # sorting
 two kinds of sorting supported by the spring data jpa
 1. static 
