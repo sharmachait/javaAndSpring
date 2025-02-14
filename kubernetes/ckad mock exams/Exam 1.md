@@ -463,6 +463,20 @@ spec:
   hard: 
     resourcequotas: "1"
 ```
+
+###### explanation
+```yml
+hard:resourcequotas: "1"
+```
+
+This specifically limits the number of ResourceQuota objects that can exist in the namespace to 1.
+
+1. This creates an interesting self-limiting situation:
+    - This ResourceQuota itself counts as one ResourceQuota
+    - Since it limits ResourceQuotas to 1, no other ResourceQuota objects can be created in this namespace
+    - If someone tries to create another ResourceQuota in this namespace, Kubernetes will reject it
+
+This is a meta-control mechanism - it's using a ResourceQuota to limit ResourceQuotas themselves. This can be useful when you want to prevent users from creating additional resource quotas that might override or conflict with your intended resource management policies.
 ###### Q16
 Using the pod template on **student-node** at `/root/ckad08-dotfile-aecs.yaml` , create a pod `ckad18-secret-pod` in the namespace `ckad18-secret` with the specifications as defined below:  
 Define a volume section named `secret-volume` that is backed by a Kubernetes Secret named `ckad18-secret-aecs`.  
@@ -544,6 +558,3 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Never
 ```
-###### Q19
-
-###### solution

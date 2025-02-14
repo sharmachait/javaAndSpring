@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/ckad mock exams/Exam 1.md",
+                "file": "kubernetes/ckad mock exams/Exam 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Exam 1"
+              "title": "Exam 2"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "jobs",
+                "query": "ambass",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -177,10 +177,17 @@
   },
   "active": "033826ff3cb88d23",
   "lastOpenFiles": [
-    "kubernetes/04. Secrets, Configmaps and volumes.md",
     "kubernetes/ckad mock exams/Exam 1.md",
+    "kubernetes/15. Multi container pods.md",
+    "kubernetes/06. Multi container pods.md",
+    "kubernetes/04. Secrets, Configmaps and volumes.md",
+    "kubernetes/ckad mock exams/Exam 2.md",
+    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
+    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "kubernetes/20. Custom resource definition.md",
+    "kubernetes/09. security context.md",
     "kubernetes/02. Services and ingress.md",
+    "kubernetes/17. Helm.md",
     "kubernetes/02.01 Network policies.md",
     "kubernetes/ckad mock exams",
     "kubernetes/01.03 Jobs and CronJobs.md",
@@ -189,21 +196,14 @@
     "Spring-Websockets/chat app.md",
     "Spring-Websockets/Broker.md",
     "Spring/12.3 DAO with jdbc template.md",
-    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
     "kubernetes/08. Imperative commands.md",
-    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "kubernetes/01.04 Stateful sets.md",
     "01. Java for DSA.md",
     "Spring/12.2 DAO pattern with jdbc.md",
     "Spring/11. database connection.md",
-    "kubernetes/09. security context.md",
     "kubernetes/01.02 Deployments strategies.md",
     "kubernetes/01. Pods and Deployments.md",
     "kubernetes/01.01 labels and selectors.md",
-    "kubernetes/00. KIND.md",
-    "kubernetes/10. service acounts.md",
-    "Spring/13. Entity relationships.md",
-    "Spring/12.1 hibernate jpa jdbc best practices.md",
     "Pasted image 20250116004010.png",
     "Pasted image 20250108012446.png",
     "Pasted image 20250108004314.png",
