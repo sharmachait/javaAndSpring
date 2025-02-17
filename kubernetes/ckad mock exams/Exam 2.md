@@ -27,7 +27,7 @@ spec:
     volumeMounts:
     - name: my-vol
       mountPath: /var/log
-    command: ["/bin/sh","-c","while true; do echo \"$(date) Hi I am from Sidecar container\" >> /var/log/index.html; sleep 5; done"]
+    command: ["/bin/sh","-c","while [ true ]; do echo \"$(date) Hi I am from Sidecar container\" >> /var/log/index.html; sleep 5; done"]
 ```
 ###### Q2
 In the `ckad-multi-containers` namespace, create pod named `dos-containers-pod` which has 2 containers matching the below requirements:
