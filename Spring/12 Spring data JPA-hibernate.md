@@ -393,6 +393,9 @@ but for any custom methods in the repository methods we need to define them so t
 public interface CoursesRepository extends JpaRepository<Courses, Long> {
     List<Courses> findBySomeCriteria(String criteria, Sort sort);
     List<Courses> findBySomeCriteria();
+	
+	@Async
+	Future<Courses> findByName(String name);
 }
 ```
 the string criteria is a must have and it will not work without it
