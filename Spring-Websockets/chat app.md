@@ -89,7 +89,3 @@ messagingTemplate.convertAndSendToUser(
 this actually send a message to /user/{username}/queue/messages
 
 and now the person who knows his own username can subscribe to it
-
-
-```javascript
-```

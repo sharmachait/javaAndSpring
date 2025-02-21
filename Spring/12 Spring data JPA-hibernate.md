@@ -22,7 +22,7 @@ just like MongoRepository
 this project implements all these interfaces using hibernate
 
 1. to be able to use the repository of a model we need to define that model as an @Entity, and annotations like @Table and @Column,
-##### JPA will try to match by removing th underscore as well
+##### JPA will try to match by removing the underscore as well
 use table if pojo and table name are not same same for colmun
 ```java
 
@@ -190,7 +190,7 @@ readBy getBy and findBy are equivalent
 ![[Pasted image 20241002144014.png]]
 ![[Pasted image 20241002144050.png]]
 
-## build in auditing
+## built in auditing
 for columns like createdAt, createdBy, updatedAt and updatedBy with the help of annotations
 
 to switch on auditing
@@ -224,14 +224,38 @@ but how will the framework know what is the current time and who is logged in?
 2. to let JPA know who is logged in we need to implement AuditorAware Interface and register a bean for it
 ```java
 @Component("auditAwareImpl")
-public class AuditAwareImpl implements AuditorAware<String> {
-	@Override
-	public Optional<String > getCurrentAuditor(){
-		return Optional.ofNullable(
-			SecurityContextHolder.getContext()
-			.getAuthentication().getName()
-			);
-	}
+public class JwtAuditAwareImpl implements AuditorAware<String> {
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired 
+    private Environment env;
+    @Override
+    public Optional<String> getCurrentAuditor() {
+        // Get Authorization header
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            // Extract token
+            String token = authHeader.substring(7);
+            try {
+                // Parse token and extract username
+                // This depends on your JWT structure and library
+                String username = extractUsernameFromToken(token);
+                return Optional.ofNullable(username);
+            } catch (Exception e) {
+                // Log the exception
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
+    }
+    private String extractUsernameFromToken(String token) {
+        // Using JWT library like jjwt
+        Claims claims = Jwts.parser()
+                .setSigningKey(env.getProperty("jwtsecret")) // Use your actual signing key
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject(); // Assuming subject contains username
+    }
 }
 ```
 
@@ -493,7 +517,7 @@ but if we use named native queries, and want to use pageable as well then we nee
 		query = "SELECT count(*) as cnt FROM contact_msg c WHERE c.status = :status",
 		resultSetMapping = "SqlResultSetMapping.count"),
 })
-public class Contact extends BaseEntity{
+public class Contact extends BaseEntity {
 
 }
 ```
