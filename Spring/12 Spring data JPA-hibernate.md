@@ -163,7 +163,119 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 ```
 
+## Data base transaction isolation levels
+1. Repeatable read - 
+	- Your transaction receives a consistent view of the database at the time the first read operation occurs
+	- This view remains consistent throughout your transaction, even if other transactions commit changes
+	- Your transaction effectively works with a snapshot of the data taken at the start of the transaction
+2. Read Committed -  all the reads in our transaction will receive a fresh snapshot of the data
+3. Read Uncommitted - Reads are not consistent, but may avoid additional database locks
+4. serializable - Similar to Repeatable Read, but may lock the selected rows
+### lost updates dues to the snapshot view can be handled with DB locks 
+In the Spring Data JPA example, several different types of locks are being used. Let's break down each type and their differences
+## 1. Optimistic Locking
 
+```sql
+ALTER TABLE your_table_name 
+ADD COLUMN "version" INTEGER NOT NULL DEFAULT 0;
+```
+**Implementation:** Uses a `@Version` field in the entity class.
+
+```java
+@Entity 
+public class Employee {     
+	// other fields         
+	@Version    
+	private Long version; 
+}
+```
+
+**How it works:**
+- Doesn't acquire actual database locks
+- When an entity is loaded, JPA tracks its version
+- On save/update, JPA verifies the version hasn't changed
+- If version has changed, it throws `OptimisticLockingFailureException`
+**Best for:** High-concurrency, low-conflict scenarios where most concurrent operations don't modify the same records.
+
+we also need to use the lock annotation for custom queries
+```java
+@Lock(LockModeType.OPTIMISTIC) 
+Optional<Product> findByName(Long id);
+```
+###### downsides
+if any update outside of hibernate omit updating version we may have consistency issues
+## 2. Pessimistic Locks
+uses database native mechanisms to lock the records
+```sql
+BEGIN;
+SELECT * FROM accounts WHERE id = 123 FOR UPDATE;
+-- Process data and make changes
+-- Other transactions that try to acquire a lock on this row will wait
+UPDATE accounts SET balance = balance - 100 WHERE id = 123;
+COMMIT;
+```
+types of pessimistic locks supported by JPA
+1. PESSIMISTIC_READ - shared lock prevents data from being updated
+```java
+@Lock(LockModeType.PESSIMISTIC_READ) 
+Optional<Employee> findByIdWithPessimisticReadLock(Long id);
+
+@Override
+@Lock(LockModeType.PESSIMISTIC_READ) 
+Optional<Employee> findById(Long id);
+```
+1. PESSIMISTIC_WRITE - exclusive lock, prevents data from even being read 
+```java
+@Lock(LockModeType.PESSIMISTIC_WRITE) 
+Optional<Employee> findByIdWithPessimisticWriteLock(Long id);
+```
+3. PESSIMISTIC_FORCE_INCREMENT - use only if we have a version property in our entity
+
+```java
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    // For optimistic locking - find methods with default optimistic locking
+    Optional<Employee> findById(Long id);
+    
+    // For pessimistic locking - explicit methods with lock modes
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "3000")})
+    Optional<Employee> findByIdWithPessimisticWriteLock(Long id);
+    
+    @Lock(LockModeType.PESSIMISTIC_READ)
+    Optional<Employee> findByIdWithPessimisticReadLock(Long id);
+}
+```
+`@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "3000")})` specifies that when executing a database query with this annotation:
+1. The lock timeout is set to 3000 milliseconds (3 seconds)
+2. If the query attempts to access data that's locked by another transaction, it will wait up to 3 seconds before giving up and throwing an exception
+3. Pessimistic locks require an active transaction to work properly
+4. The lock must be maintained throughout your business logic until the transaction commits
+Here's why this is important:
+- Pessimistic locks are held within the scope of a transaction
+- Without `@Transactional` on your service method, the lock would be acquired and released immediately after the repository method completes
+- Any subsequent operations would not be protected by the lock
+
+```java
+@Service
+public class ItemService {
+    private final ItemRepository itemRepository;
+    @Autowired
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+    @Transactional // This is necessary
+    public Item updateItem(Long id) {
+        Item item = itemRepository.findByIdWithLock(id);
+        item.setQuantity(item.getQuantity() - 1);
+        return itemRepository.save(item);
+    }
+}
+public interface ItemRepository extends JpaRepository<Item, Long> {    
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("SELECT i FROM Item i WHERE i.id = :id")
+    Item findByIdWithLock(@Param("id") Long id);
+}
+```
 ## derived query methods 
 the method names are made up of introducer and criteria and the two sections are divided by "By"
 ```java
@@ -182,7 +294,7 @@ public interface CotactRepository extends CrudRepository<Contact,Integer>{
 6. distinct - `findDistinctByStatus`
 we can use distinct to tell JPA to get distinct items in the output like `findDistinctByStatus`
 ### criteria
-any of the entity properties seperated by `And` and `Or`
+any of the entity properties separated by `And` and `Or`
 
 readBy getBy and findBy are equivalent
 
@@ -464,6 +576,90 @@ Page<Contact> findByStatus(String status, Pageable pageable);
 ```
 
 in Native Sql queries we have to use real table names instead of just the model names and also the real column names in the database instead of the field names of the entity class
+## Transactions
+by default spring data JPA does implicit transactions for all the repository methods
+there are two types of implicit transactions
+- Read operations are done in a read only context
+- Updates and deletes are done with default transaction context
+in case of @DataJpaTest spring data jpa implicit transactions are not used because tests create explicit transactions, and if explicit transactions are created implicit ones are not used
+
+When you see an error like `LazyInitializationException: could not initialize proxy - no Session` or `failed to lazily initialize a collection of role: ... - no session or session was closed`, it means:
+
+1. You retrieved an entity from the database using Hibernate/JPA
+2. The transaction or persistence context that loaded the entity has closed
+3. You're now trying to access a lazy-loaded property (like a collection or related entity) that wasn't loaded during the initial query
+4. Since the session is closed, Hibernate can't go back to the database to fetch the missing data
+
+```java
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Transactional(readOnly = true)
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+}
+
+@RestController
+public class UserController {
+    @Autowired
+    private UserService userService;
+    
+    @GetMapping("/users/{id}")
+    public List<Order> getUserOrders(@PathVariable Long id) {
+        User user = userService.getUser(id);
+        // ERROR happens here - user.getOrders() is lazy-loaded
+        return user.getOrders(); 
+    }
+}
+```
+The `readOnly=true` parameter in `@Transactional` annotation has several important effects
+jpa derived queries use readOnly=true transactions can be overridden like so
+```java
+@Override
+@Transactional(readOnly=true)
+Optional<User> findById(Long id); 
+```
+Transactional methods can not be private, because spring data jpa uses AOP to wrap them in transactions
+
+only one transaction is created in the below example unless we use REQUIRES_NEW propagation, in that case there will be 2
+```java
+@Transactional
+public void parentmethod(){
+	a();
+	b();
+}
+@Transactional
+public void a(){
+}
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public void b(){
+}
+```
+###### readonly Performance Benefits
+1. **Query Caching**: Hibernate can better cache read-only transactions since it knows the data won't change
+2. **No Dirty Checking**: Hibernate skips the dirty checking process (which looks for changes in entities to generate update statements)
+3. **No Flush**: The persistence context won't be flushed automatically since no changes are expected
+other properties are 
+- Propagation
+	- REQUIRED - use existing transaction or create new
+	- SUPPORTS - use if existing, or execute non transactionally
+	- MANDATORY - use mandatorily current, else throw exception
+	- REQUIRES_NEW - create new
+	- NOT_SUPPORTED - execute without transaction, suspend the current one is exists
+	- NEVER - OUTSIDE TRNSACTION THROW EXCEPTION IF EXISTS
+	- NESTED - create transaction inside transaction 
+- Isolation
+- timeout
+- rollbackFor - Exception classes for which we should rollback
+- NoRollebackFor - Exception classes for which we should not rollback
+### Database Optimizations
+Some databases optimize read-only transactions by:
+- Not acquiring write locks
+- Using snapshot isolation more efficiently
+- Routing queries to read replicas
 ### update with custom queries
 to be able to update insert or delete records in the database with custom queries along with @Query annotation we also need to mention two other annotation
 1. @Transactional
@@ -471,11 +667,42 @@ to be able to update insert or delete records in the database with custom querie
 ```java
 @Modifying
 @Transactional
-@Query("UPDATE  Contact c SET c.status = ?1 WHERE c.contactId = ?2")
+@Query("UPDATE Contact c SET c.status = ?1 WHERE c.contactId = ?2")
 int updateStatusById(String status, int id);
 ```
 this will return the number of rows that were affected
 
+Delete by  - queries dont require @Modifying annotation
+```java
+@Transactional
+void deleteByLastName(String lastName);
+```
+##### Proxy mode issue
+```java
+public class Seed implments CommandLineRunner {
+	@Override
+	public void run(string ...args){
+		methodCall();
+	}
+	@Transactional
+	public void methodCall();
+}
+```
+in the above example the transactional annotation doesnt work, because all the beans are created as proxies and AOP is applied to that, so for any method calling a child method of the same class the transactional should be annotated on the parent method not the child
+another way to do it would be to extract the methodCall into a bean of its own and inject it here in the commandLineRunner and have transactional there in the bean on it, that way the proxy of the bean will be enough for AOP to apply transactions to it
+```java
+public class Seed implments CommandLineRunner {
+	@Override
+	public void run(string ...args){
+		methodCall();
+	}
+}
+@Service
+public class Method {
+	@Transactional
+	public void methodCall();
+}
+```
 ### NamedQuery & NamedNativeQuery
 Named and NamedNative allow us to manage the queries in the entity class itself
 the Name of the query is `<Name of Entity>.<Name of method in the repository>`
