@@ -105,6 +105,13 @@ spec:
     - protocol: TCP
       port: 80
 ```
+
+to ping one pod from another
+exec into the pod with
+>kubectl exec -it webapp-pod -- sh
+>nc -v -z -w 2 name-of-service 80
+
+where 2 is wait seconds, and 80 is port number
 ###### Q5
 Create a pod called `time-check` in the `dvl1987` namespace. This pod should run a container called `time-check` that uses the `busybox` image.
 1. Create a config map called `time-config` with the data `TIME_FREQ=10` in the same namespace.
@@ -125,7 +132,7 @@ spec:
   containers:
     - name: time-check
       image: busybox
-      command: ['sh', '-c', 'while true; do date; sleep &TIME_FRED; done']
+      command: ['sh', '-c', 'while true; do date; sleep &TIME_FRED; done > /opt/time/time-check.log']
       envFrom:
       - configMapRef:
           name: time-config
@@ -222,4 +229,99 @@ spec:
             cpu: "0.2"
         ports:
         - containerPort: 6379
+```
+###### Q8
+Create a cronjob called `dice` that runs every `one minute`. Use the Pod template located at `/root/throw-a-dice`. The image `throw-dice` randomly returns a value between 1 and 6. The result of 6 is considered `success` and all others are `failure`.  
+The job should be `non-parallel` and complete the task `once`. Use a `backoffLimit` of `25`.  
+If the task is not completed within `20 seconds` the job should fail and pods should be terminated.
+You don't have to wait for the job completion. As long as the cronjob has been created as per the requirements.
+###### solution
+```yml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dice
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      completions: 1
+      backoffLimit: 25 # This is so the job does not quit before it succeeds.
+      activeDeadlineSeconds: 20
+      template:
+        spec:
+          containers:
+          - name: dice
+            image: kodekloud/throw-dice
+          restartPolicy: Never
+```
+###### Q9
+Create a pod called `my-busybox` in the `dev2406` namespace using the `busybox` image. The container should be called `secret` and should sleep for `3600` seconds.  
+The container should mount a `read-only` secret volume called `secret-volume` at the path `/etc/secret-volume`. The secret being mounted has already been created for you and is called `dotfile-secret`.  
+Make sure that the pod is scheduled on `controlplane` and no other node in the cluster.
+###### solution
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: my-busybox
+  name: my-busybox
+  namespace: dev2406
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: controlplane
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: dotfile-secret
+  containers:
+  - image: busybox
+    name: secret
+    command: ["sleep"]
+    args: ["3600"]
+    volumeMounts:
+    - name: secret-volume
+      readOnly: true
+      mountPath: "/etc/secret-volume"
+```
+###### Q10
+Create a single ingress resource called `ingress-vh-routing`. The resource should route HTTP traffic to multiple hostnames as specified below:
+1. The service `video-service` should be accessible on `http://watch.ecom-store.com:30093/video`
+2. The service `apparels-service` should be accessible on `http://apparels.ecom-store.com:30093/wear`
+To ensure that the path is correctly rewritten for the backend service, add the following `annotation` to the resource:
+```
+nginx.ingress.kubernetes.io/rewrite-target: /
+```
+Here `30093` is the port used by the `Ingress Controller`
+###### solution
+```yml
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-vh-routing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: watch.ecom-store.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/video"
+        backend:
+          service:
+            name: video-service
+            port:
+              number: 8080
+  - host: apparels.ecom-store.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/wear"
+        backend:
+          service:
+            name: apparels-service
+            port:
+              number: 8080
 ```
