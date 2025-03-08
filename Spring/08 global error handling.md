@@ -3,15 +3,38 @@
 @ExceptionHandler
 
 ```java
-@ControllerAdvice
-public class GlobalExceptionHandler {
-	@ExceptionHandler(Exception.class)
-	public ModelAndView exceptionHandler(Exception e){
-		ModelAndView errorPage = new ModelAndView();
-		errorPage.setViewName("error");
-		errorPage.addObject("errorMessage",exception.getMessage());
-		return errorPage;
-	}
+@ControllerAdvice  
+public class GlobalExceptionHandler {  
+    @ExceptionHandler(Exception.class)  
+    public ResponseEntity<ErrorResponseDto> handleException(Exception ex, WebRequest request) {  
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(  
+                request.getDescription(false), // returns the api path where this exception was thrown  
+                HttpStatus.INTERNAL_SERVER_ERROR,  
+                ex.getMessage(),  
+                LocalDateTime.now()  
+        );        
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);  
+    }  
+    @ExceptionHandler(CustomerAlreadyExistsException.class)  
+    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException ex, WebRequest request) {  
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(  
+                request.getDescription(false), // returns the api path where this exception was thrown  
+                HttpStatus.BAD_REQUEST,  
+                ex.getMessage(),  
+                LocalDateTime.now()  
+        );        
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);  
+    }  
+    @ExceptionHandler(ResourceNotFoundException.class)  
+    public ResponseEntity<ErrorResponseDto> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {  
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(  
+                request.getDescription(false), // returns the api path where this exception was thrown  
+                HttpStatus.NOT_FOUND,  
+                ex.getMessage(),  
+                LocalDateTime.now()  
+        );        
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);  
+    }
 }
 ```
 

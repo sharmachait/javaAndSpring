@@ -39,39 +39,69 @@ public class Contact {
 ### @NotEmpty - size should be greater than zero, checks not null
 ### @NotBlank - trimmed length should be greater than zero, checks not null
 
-we need to inform the view that some validations need to happen for the model 
-```java
-@RequestMapping("/contact")
-public String displayContact(Model model){
-	model.addAttribute("contact", new Contact());
-	return "contact.html";
-}
-```
-this is the original get method that returns the view
-
-for the post endpoint that will receive the model from the frontend
-we basically need to tell the framework that this value is from the view and that it has to perform validations on it when mapping the view contact object to it
-```java
-@RequestMapping("/saveMsg", method = POST)
-public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
-	if(errors.hasErrors()){
-		return "contact.html";
-	}
-	contactService.saveMessage(contact);
-	return "redirect:/contact.html";
-}
-```
 without the @Valid annotation validations will not performed
+```java
+@PostMapping  
+public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customer) throws CustomerAlreadyExistsException {  
+    accountsService.createAccount(customer);  
+    return ResponseEntity  
+            .status(HttpStatus.CREATED)  
+            .body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));  
+}
+@GetMapping  
+public ResponseEntity<CustomerDto> getAccountDetails(@RequestParam  
+                                                         @Pattern(regexp="(^$|[0-9]{10})", message = "Mobile number must be 10 digits")  
+                                                         String mobileNumber){  
+    CustomerDto customerDto = accountsService.getAccount(mobileNumber);  
+    return ResponseEntity  
+            .status(HttpStatus.OK)  
+            .body(customerDto);  
+}
+```
 if any errors are detected they are thrown and caught in the errors object
 
-the difference between the two is that contact.html will return the errors to the frontend with the values that were populated
-but the redirect one will trigger the entire workflow of that page again
+with this validations are performed and error is thrown but we need to specify how to send the error to the frontend application
+we can do that by extending our global exception handling class and overriding the default implementation of the handler
+```java
+@ControllerAdvice  
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+	@Override  
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,   
+	HttpHeaders headers,   
+	HttpStatusCode status,   
+	WebRequest request) {  
+	    Map<String, String> validationErrors = new HashMap<>();  
+	    List<ObjectError> validationErrorList = ex.getBindingResult().getAllErrors();  
+	    validationErrorList.forEach(error -> {  
+	        String errorField = ((FieldError)error).getField();  
+	        String errorMessage = error.getDefaultMessage();  
+	        validationErrors.put(errorField, errorMessage);  
+	    });    
+	    return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);  
+	}
+}
+```
+this class has a method to handle validation exceptions
 
-and now in the view when ever we add to this attribute MVC framework will do the validations for us
-in the view on the form where we are populating the values we need to specify the object
-and instead of name and id for the input tags we can use thymeleaf field tag
-```html
-<form th:object="${contact}" th:action="@{/saveMsg}" method="post" class="signin-form">
-	<input type="text" th:field="*{name}"/>
-</form>
+## validating embedded properties
+
+lets say we have a customer class and an address class, the customer has an address and the fields of the address class has annotations on it to validate the data, we  will need to validate the address field in the customer class to tell spring boot that the address needs to be validated as well
+
+```java
+@Embeddable
+public class Address {
+    private String street;
+	@Length(max=30)
+    private String city;
+    private String zipCode;
+}
+@Entity
+public class Person {
+    @Id
+    private Long id;
+    private String name;
+    @Valid
+    @Embedded
+    private Address address;
+}
 ```

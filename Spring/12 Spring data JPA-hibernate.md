@@ -308,26 +308,27 @@ for columns like createdAt, createdBy, updatedAt and updatedBy with the help of 
 to switch on auditing
 1. annotate the base entity with the required fields
 ```java
-@Data
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
-	
-	@CreatedDate
-	@Column(updatable = false)
-	private LocalDateTime createdAt;
-	
-	@CreatedBy
-	@Column(updatable = false)
-	private String createdBy;
-	
-	@LastModifiedDate
-	@Column(insertable = false)
-	private LocalDateTime updatedAt;
-	
-	@LastModifiedBy
-	@Column(insertable = false)
-	private String updatedBy;
+@EntityListeners(AuditingEntityListener.class)// required for auditing
+@MappedSuperclass  
+@Data  
+@AllArgsConstructor  
+@RequiredArgsConstructor  
+public class BaseEntity {  
+    @CreatedDate  
+    @Column(updatable = false)  
+    private LocalDateTime createdAt;  
+  
+    @LastModifiedDate  
+    @Column(insertable = false)  
+    private LocalDateTime updatedAt;  
+  
+    @CreatedBy  
+    @Column(updatable = false)  
+    private String createdBy;  
+  
+    @LastModifiedBy  
+    @Column(insertable = false)  
+    private String updatedBy;  
 }
 ```
 
@@ -352,7 +353,7 @@ public class JwtAuditAwareImpl implements AuditorAware<String> {
                 // Parse token and extract username
                 // This depends on your JWT structure and library
                 String username = extractUsernameFromToken(token);
-                return Optional.ofNullable(username);
+                return Optional.of(username);
             } catch (Exception e) {
                 // Log the exception
                 return Optional.empty();
@@ -370,14 +371,15 @@ public class JwtAuditAwareImpl implements AuditorAware<String> {
     }
 }
 ```
-
 3. enable auditing by annotating the entry point with the bean we just injected
 ```java
-@SpringApplication
-@EnableJpaRepositories("com.sharmachait.wazir")
-@EntityScan("com.sharmachait.wazir.model")
-@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
-public class Wazir{}
+@SpringBootApplication  
+@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")  
+public class AccountsApplication {  
+    public static void main(String[] args) {  
+       SpringApplication.run(AccountsApplication.class, args);  
+    }  
+}
 ```
 
 remember we can always expect Authentication in the method params of the controller
