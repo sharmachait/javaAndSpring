@@ -325,3 +325,8 @@ spec:
             port:
               number: 8080
 ```
+###### Q11
+A replicaset `rs-d33393` is created. However the pods are not coming up. Identify and fix the issue.
+Once fixed, ensure the ReplicaSet has 4 `Ready` replicas.
+###### Solution
+The image used for the replicaset should be `busybox` instead of `busyboxXXXXXXX`. Use `kubectl edit rs rs-d33393` to fix the image. Then delete all PODs to provision new ones with the new image.
