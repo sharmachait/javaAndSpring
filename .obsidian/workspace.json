@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e1208c5580eec0f7",
+        "id": "5486ed2740c94fca",
         "type": "tabs",
         "children": [
           {
-            "id": "033826ff3cb88d23",
+            "id": "1fe2ef433c0a1a48",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01. Java for DSA.md",
+                "file": "Spring/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01. Java for DSA"
+              "title": "Untitled"
             }
           }
         ]
@@ -175,8 +175,14 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "033826ff3cb88d23",
+  "active": "1fe2ef433c0a1a48",
   "lastOpenFiles": [
+    "Spring/24. Docker.md",
+    "Pasted image 20250317073517.png",
+    "Spring/Untitled.md",
+    "01. Java for DSA.md",
+    "Untitled.md",
+    "Spring/Untitled",
     "Spring/13.1 JPA inheritance.md",
     "Spring/13. Entity relationships.md",
     "Spring/12.1 hibernate jpa jdbc best practices.md",
@@ -198,11 +204,6 @@
     "JUnit and Mockito/01. JUnit.md",
     "JUnit and Mockito/07. Testing JPA repositories.md",
     "kubernetes/ckad mock exams/Exam 5.md",
-    "Spring/10. H2 database and JDBC.md",
-    "Spring/22. file upload download rest api.md",
-    "Spring/21. Spring Azure function.md",
-    "kubernetes/01. Pods and Deployments.md",
-    "kubernetes/05. volumes and persistent volumes.md",
     "image.png",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Pasted image 20250216010924.png",
@@ -214,7 +215,6 @@
     "Pasted image 20241231100323.png",
     "Pasted image 20241217091303.png",
     "Pasted image 20241208210426.png",
-    "Pasted image 20241207230228.png",
     "Spring-Websockets",
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
