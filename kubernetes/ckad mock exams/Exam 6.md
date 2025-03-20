@@ -330,3 +330,105 @@ A replicaset `rs-d33393` is created. However the pods are not coming up. Ident
 Once fixed, ensure the ReplicaSet has 4 `Ready` replicas.
 ###### Solution
 The image used for the replicaset should be `busybox` instead of `busyboxXXXXXXX`. Use `kubectl edit rs rs-d33393` to fix the image. Then delete all PODs to provision new ones with the new image.
+###### Q12
+Please use the namespace `nginx-depl-svcn` for the following scenario.  
+Create a deployment with name `nginx-ckad10-svcn` using `nginx` image with `2` replicas. Also expose the deployment via ClusterIP service .i.e. `nginx-ckad10-service-svcn` on port 80. Use the label `app=nginx-ckad` for both resources.  
+Now, create a NetworkPolicy .i.e. `netpol-ckad-allow-svcn` so that only pods with label `criteria: allow` can access the deployment and apply it.
+###### Solution
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-ckad
+  name: nginx-ckad10-svcn
+  namespace: nginx-depl-svcn
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-ckad
+  template:
+    metadata:
+      labels:
+        app: nginx-ckad
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-ckad
+  name: nginx-ckad10-service-svcn
+  namespace: nginx-depl-svcn
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx-ckad
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ckad-allow-svcn
+  namespace: nginx-depl-svcn
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          criteria: allow
+    ports:
+    - protocol: TCP
+      port: 80
+```
+
+###### Q13
+Create a service account named `ckad23-sa-aecs` in the namespace `ckad23-nssa-aecs`.  
+Grant the service account `get` and `list` permissions to access **all resources** within the namespace using a Role named `wide-access-aecs`.  
+Also bind the **Role** to the service account using a **RoleBinding** named `wide-access-rb-aecs`, restricting the access to the **ckad23-nssa-aecs** namespace only.
+###### Solution
+```yml
+# ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ckad23-sa-aecs
+  namespace: ckad23-nssa-aecs
+---
+# Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: wide-access-aecs
+  namespace: ckad23-nssa-aecs
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list"]
+---
+# RoleBinding 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wide-access-rb-aecs
+  namespace: ckad23-nssa-aecs
+subjects:
+- kind: ServiceAccount
+  name: ckad23-sa-aecs
+  namespace: ckad23-nssa-aecs
+roleRef:
+  kind: Role
+  name: wide-access-aecs
+  apiGroup: rbac.authorization.k8s.io
+```
