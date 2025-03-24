@@ -86,3 +86,91 @@ helm lint ./new-version
 helm install webpage-server-02 ./new-version
 helm uninstall webpage-server-01
 ```
+###### Q9
+In the `ckad-multi-containers` namespace, create a pod named `healthy-server`, which consists of 2 containers. One main container and one init-container both are running `busybox:1.28` image. Init container should print this message `Initialize application environment!` and then sleep for `10` seconds. Main container should print this message `The app is running!` and then sleep for `3600` seconds.
+###### solution
+do one of the following two
+passing command to sh with -c 
+```yml
+  - command:
+    - sh
+    - -c
+    - echo Initialize application environment! && sleep 10
+```
+or
+
+```yml
+  - command:
+    - sh
+    - -c
+    - echo 'Initialize application environment!' && sleep 10
+```
+dont do 
+```yml
+  - command:
+    - sh
+    - -c
+    - echo "Initialize application environment!" && sleep 10
+```
+###### Q10
+The deployment called `foundary-apd` inside the `blue-apd` namespace on `cluster3` has undergone several, routine, rolling updates and rollbacks. 
+Inspect the `revision 3` of this deployment and store the image name that was used in this revision in the `/root/records/foundry-revision-book.txt` file on the `student-node`.  
+###### solution
+```sh
+kubectl rollout history -n blue-apd deploy foundary-apd --revision=3
+```
+###### Q11
+One co-worker deployed an nginx helm chart on the `cluster1` server called `bitnami`. A new update is pushed to the helm chart, and the team wants you to update the helm repository to fetch the new changes.  
+After updating the helm chart, upgrade the helm chart version to `18.3.0` and increase the replica count to `2`.  
+**NOTE: -** We have to perform this task on the `cluster1-controlplane` node.  
+You can SSH into the `cluster1` using `ssh cluster1-controlplane` command.
+###### solution
+```sh
+helm repo update bitnami
+helm pull bitnami/nginx --untar
+cd nginx
+vi Chart.yaml
+vi values.yaml [/replicaCount]
+helm uninstall bitnami -n ckad10-finance-ns
+helm install bitnami -n ckad10-finance-ns ./nginx
+```
+###### Q12
+We have deployed some pods in the namespaces `ckad-alpha` and `ckad-beta`.  
+You need to create a NetworkPolicy named `ns-netpol-ckad` that will restrict all Pods in Namespace `ckad-alpha` to only have outgoing traffic to Pods in Namespace `ckad-beta` . Ingress traffic should not be affected.  
+However, the NetworkPolicy you create should allow egress traffic on port 53 TCP and UDP form any where. (or not and)
+###### solution
+```yml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ns-netpol-ckad
+  namespace: ckad-alpha
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ckad-beta
+  - ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+```
+and not (as this will logically and both)
+```yml
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ckad-beta
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+```
+###### Q14

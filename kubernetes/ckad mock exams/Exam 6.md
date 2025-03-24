@@ -398,6 +398,19 @@ Create a service account named `ckad23-sa-aecs` in the namespace `ckad23-nssa
 Grant the service account `get` and `list` permissions to access **all resources** within the namespace using a Role named `wide-access-aecs`.  
 Also bind the **Role** to the service account using a **RoleBinding** named `wide-access-rb-aecs`, restricting the access to the **ckad23-nssa-aecs** namespace only.
 ###### Solution
+imperative way
+
+```sh
+kubectl config use-context cluster3
+kubectl create ns ckad23-nssa-aecs
+kubectl create serviceaccount ckad23-sa-aecs -n ckad23-nssa-aecs
+kubectl create role wide-access-aecs --namespace=ckad23-nssa-aecs --verb=get,list --resource=* 
+kubectl create rolebinding wide-access-rb-aecs \
+   --role=wide-access-aecs \
+   --serviceaccount=ckad23-nssa-aecs:ckad23-sa-aecs \
+   --namespace=ckad23-nssa-aecs
+```
+
 ```yml
 # ServiceAccount
 apiVersion: v1
@@ -432,3 +445,4 @@ roleRef:
   name: wide-access-aecs
   apiGroup: rbac.authorization.k8s.io
 ```
+###### Q18
