@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kubernetes/ckad mock exams/Exam 5.md",
+                "file": "Spring/25. Spring Cloud Config.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Exam 5"
+              "title": "25. Spring Cloud Config"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "helm pull",
+                "query": "burst",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 306.51103591918945
+    "width": 200
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -177,17 +177,20 @@
   },
   "active": "8e174e12d85b25c3",
   "lastOpenFiles": [
-    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
+    "Spring/Untitled.md",
+    "Spring/25. Spring Cloud Config.md",
     "kubernetes/ckad mock exams/Exam 5.md",
+    "kubernetes/11. resource requests, limits and quotas.md",
+    "kubernetes/20. Custom resource definition.md",
+    "kubernetes/ckad mock exams/Exam 1.md",
+    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
     "kubernetes/ckad mock exams/Exam 3.md",
     "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
     "kubernetes/ckad mock exams/Exam 4.md",
     "kubernetes/ckad mock exams/Exam 2.md",
-    "kubernetes/ckad mock exams/Exam 1.md",
     "kubernetes/02.01 Network policies.md",
     "kubernetes/01. Pods and Deployments.md",
     "kubernetes/00. KIND.md",
-    "Spring/Spring Cloud Config.md",
     "Spring/18. properties and logging.md",
     "kubernetes/ckad mock exams/Exam 6.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
@@ -196,15 +199,12 @@
     "kubernetes/10. service acounts.md",
     "kubernetes/05. volumes and persistent volumes.md",
     "kubernetes/17. Helm.md",
-    "Spring/Untitled.md",
     "Spring/24. Docker.md",
     "Pasted image 20250317073517.png",
     "01. Java for DSA.md",
     "Untitled.md",
     "Spring/Untitled",
     "Spring/13.1 JPA inheritance.md",
-    "Spring/13. Entity relationships.md",
-    "Spring/12.1 hibernate jpa jdbc best practices.md",
     "image.png",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Pasted image 20250216010924.png",

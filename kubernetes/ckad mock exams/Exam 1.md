@@ -382,6 +382,8 @@ Create a pod named `ckad17-qos-aecs-3` in namespace `ckad17-nqoss-aecs` with
 Define other fields such that the Pod is configured to use the Quality of Service (QoS) class of `Burstable`.
 Also retrieve the `name` and `QoS` class of each Pod in the namespace `ckad17-nqoss-aecs` in the below format and save the output to a file named `qos_status_aecs` in the `/root` directory.
 ###### solution
+A Pod is given a QoS class of `Burstable` if:
+- At least one Container in the Pod has a memory or CPU request or limit
 ```yml
 apiVersion: v1
 kind: Pod
