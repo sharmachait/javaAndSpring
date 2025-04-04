@@ -168,22 +168,31 @@ In the `ckad14-sa-projected` namespace, configure the `ckad14-api-pod` Pod t
 Mount the service account token to the container at `/var/run/secrets/tokens`, with an expiration time of `7000` seconds.  
 Additionally, set the intended audience for the token to `vault` and path to `vault-token`.
 ###### solution
+A `projected` volume maps several existing volume sources into the same directory.
 ```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: ckad14-sa-projected
+  name: ckad14-api-pod
 spec:
   containers:
-  - volumeMounts: 
-    - mountPath: /var/run/secrets/tokens
-      name: vault-token
+  - name: container-test
+    image: busybox:1.28
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: vault-token
+      mountPath: "/var/run/secrets/tokens"
       readOnly: true
+  serviceAccountName: default
   volumes:
   - name: vault-token
     projected:
-      defaultMode: 420
       sources:
       - serviceAccountToken:
+          audience: vault
           expirationSeconds: 7000
           path: vault-token
-          audience: vault
 ```
 ###### Q15
 Create a custom resource `my-anime` of kind `Anime` with the below specifications:  

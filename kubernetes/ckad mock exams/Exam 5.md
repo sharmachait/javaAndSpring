@@ -174,3 +174,112 @@ and not (as this will logically and both)
       port: 53
 ```
 ###### Q14
+There is a requirement to share a volume between two containers that are running within the same pod. Use the following instructions to create the pod and related objects:  
+**-** Create a pod named `grape-pod-ckad06-str`.  
+**-** The main container should use the `nginx` image and mount a volume called `grape-vol-ckad06-str` at path `/var/log/nginx`.  
+**-** The sidecar container can use `busybox` image, you might need to add a `sleep` command to this container to keep it running. Next, mount the same volume called `grape-vol-ckad06-str` at the path `/usr/src`.  
+**-** The volume should be of type `emptyDir`.
+###### solution
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: grape-pod-ckad06-str
+spec:
+  containers:
+  - image: nginx
+    name: grape-pod-ckad06-str
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: grape-vol-ckad06-str
+  - image: busybox
+    name: grape-pod-ckad06-str-sidecar
+    command: ["sleep"]
+    args: ["3600"]
+    volumeMounts:
+    - mountPath: /usr/src
+      name: grape-vol-ckad06-str
+  volumes:
+  - name: grape-vol-ckad06-str
+    emptyDir: {}
+```
+###### Q15
+In the `ckad-job` namespace, schedule a job called `learning-every-minute` that prints this message in the shell every minute: `I am practicing for CKAD certification`.  
+In case the container in pod failed for any reason, it should be restarted automatically.  
+Use `busybox:1.28` image for the cronjob!
+###### solution
+```yml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: ckad-job
+  name: learning-every-minute
+spec:
+  schedule: "* * * * *"  # Runs every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: learning-every-minute
+            image: busybox:1.28
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - echo I am practicing for CKAD certification
+          restartPolicy: OnFailure
+```
+###### Q16
+A new payment service has been introduced. Since it is a sensitive application, it is deployed in its own namespace `critical-space`. Inspect the resources and service created.  
+You are requested to make the new application available at `/pay`. Create an ingress resource named `ingress-ckad09-svcn` for the payment application to make it available at `/pay`
+Identify and implement the best approach to making this application available on the ingress controller and test to make sure its working. Look into annotations: rewrite-target as well.
+###### solution
+```sh
+kubectl get ingressclasses -o wide
+```
+```
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       5m50s
+```
+get the port number from the service
+```yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ckad09-svcn
+  namespace: critical-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /pay
+        pathType: Prefix
+        backend:
+          service:
+            name: pay-service
+            port:
+              number: 8282
+```
+###### Q16
+For this scenario, create a deployment named `authentication-deployment` using the image `kodekloud/webapp-color` with `3` replicas.  
+Expose the `authentication-deployment` with service named `authentication-service` on port `31638` on the nodes of the cluster.  
+Note: The web application listens on port `8080`.
+###### solution
+in such case make sure the port and target port both are 8080
+
+###### Q17
+Create a **ResourceQuota** called `ckad19-rqc-aecs` in the namespace `ckad19-rqc-ns-aecs` and enforce a limit of `one` **ResourceQuota** for the namespace.
+###### solution
+```yml
+apiVersion: v1 
+kind: ResourceQuota 
+metadata: 
+  name: ckad19-rqc-aecs 
+  namespace: ckad19-rqc-ns-aecs spec: 
+hard: 
+  resourcequotas: "1"
+```

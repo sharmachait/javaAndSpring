@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/25. Spring Cloud Config.md",
+                "file": "01. Java for DSA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "25. Spring Cloud Config"
+              "title": "01. Java for DSA"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "burst",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 313.5086555480957
   },
   "right": {
     "id": "3419dc621afb2b10",
@@ -175,37 +175,38 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "8e174e12d85b25c3",
+  "active": "1fe2ef433c0a1a48",
   "lastOpenFiles": [
-    "Spring/Untitled.md",
-    "Spring/25. Spring Cloud Config.md",
-    "kubernetes/ckad mock exams/Exam 5.md",
-    "kubernetes/11. resource requests, limits and quotas.md",
-    "kubernetes/20. Custom resource definition.md",
-    "kubernetes/ckad mock exams/Exam 1.md",
-    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
-    "kubernetes/ckad mock exams/Exam 3.md",
-    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
-    "kubernetes/ckad mock exams/Exam 4.md",
-    "kubernetes/ckad mock exams/Exam 2.md",
-    "kubernetes/02.01 Network policies.md",
     "kubernetes/01. Pods and Deployments.md",
     "kubernetes/00. KIND.md",
+    "kubernetes/000. CMD ARGs and ENTRYPOINT.md",
+    "kubernetes/ckad mock exams/Exam 1.md",
+    "kubernetes/ckad mock exams/Exam 5.md",
+    "kubernetes/ckad mock exams/Exam 2.md",
+    "kubernetes/05. volumes and persistent volumes.md",
+    "Spring/25. Spring Cloud Config.md",
+    "kubernetes/15. Multi container pods.md",
+    "kubernetes/06. Multi container pods.md",
+    "kubernetes/ckad mock exams/Exam 4.md",
+    "kubernetes/ckad mock exams/Exam 3.md",
+    "Pasted image 20240908114847.png",
+    "image.png",
+    "Spring/Untitled.md",
+    "kubernetes/11. resource requests, limits and quotas.md",
+    "kubernetes/20. Custom resource definition.md",
+    "kubernetes/0000. Vim + shell + kubectl shortcuts.md",
+    "kubernetes/02.01 Network policies.md",
     "Spring/18. properties and logging.md",
     "kubernetes/ckad mock exams/Exam 6.md",
     "kubernetes/04. Secrets, Configmaps and volumes.md",
     "kubernetes/18. Security.md",
     "kubernetes/09. security context.md",
     "kubernetes/10. service acounts.md",
-    "kubernetes/05. volumes and persistent volumes.md",
     "kubernetes/17. Helm.md",
     "Spring/24. Docker.md",
     "Pasted image 20250317073517.png",
     "01. Java for DSA.md",
-    "Untitled.md",
     "Spring/Untitled",
-    "Spring/13.1 JPA inheritance.md",
-    "image.png",
     "kubernetes/The Book of Kubernetes - Alan Hohn.pdf",
     "Pasted image 20250216010924.png",
     "kubernetes/ckad mock exams",
@@ -215,7 +216,6 @@
     "Pasted image 20250102122206.png",
     "Pasted image 20241231100323.png",
     "Pasted image 20241217091303.png",
-    "Pasted image 20241208210426.png",
     "Spring-Websockets",
     "Saga + Clean + DDD +CQRS",
     "kubernetes",
