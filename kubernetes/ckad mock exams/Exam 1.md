@@ -560,3 +560,8 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Never
 ```
+
+###### Q20
+export the built container image in OC-format and store it at -/human stork/macque 3.0 tar
+###### solution
+`docker save <image>:<tag> > ~/humane-stork/macaque-3.0.tar`

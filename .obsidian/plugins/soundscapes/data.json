@@ -1,0 +1,12 @@
+{
+  "soundscape": "synthwave",
+  "volume": 3,
+  "autoplay": true,
+  "scrollSongTitle": true,
+  "customSoundscapes": [],
+  "myMusicIndex": [],
+  "myMusicFolderPath": "",
+  "reindexFrequency": "5",
+  "myMusicShuffle": false,
+  "currentTrackIndex": 0
+}
