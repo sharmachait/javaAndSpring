@@ -1,11 +1,17 @@
 {
-  "soundscape": "synthwave",
-  "volume": 3,
+  "soundscape": "MY_MUSIC",
+  "volume": 1,
   "autoplay": true,
   "scrollSongTitle": true,
   "customSoundscapes": [],
-  "myMusicIndex": [],
-  "myMusicFolderPath": "",
+  "myMusicIndex": [
+    {
+      "fileName": "Elley Duhé & Whethan - MONEY ON THE DASH - SPED UP (Audio).mp3",
+      "fullPath": "C:\\Users\\chait\\Downloads\\music\\Elley Duhé & Whethan - MONEY ON THE DASH - SPED UP (Audio).mp3",
+      "title": "Elley Duhé & Whethan - MONEY ON THE DASH - SPED UP (Audio)"
+    }
+  ],
+  "myMusicFolderPath": "C:\\Users\\chait\\Downloads\\music",
   "reindexFrequency": "5",
   "myMusicShuffle": false,
   "currentTrackIndex": 0

@@ -445,4 +445,98 @@ roleRef:
   name: wide-access-aecs
   apiGroup: rbac.authorization.k8s.io
 ```
+###### Q14
+Get nginx pod's ip created in previous step, use a temp busybox image to wget its '/'
+###### Solution
+```sh
+kubectl get po -o wide # get the IP, will be something like '10.1.1.131'
+
+kubectl run busybox --image=busybox --rm -it --restart=Never -- wget -O- 10.1.1.131:80
+```
+###### Q15
+If pod crashed and restarted, get logs about the previous instance
+###### Solution
+```sh
+kubectl logs nginx -p
+# or
+kubectl logs nginx --previous
+```
+###### Q16
+Show all labels of the pods
+###### Solution
+```sh
+kubectl get po --show-labels
+```
+###### Q17
+Change the labels of pod 'nginx2' to be app=v2
+###### Solution
+```sh
+kubectl label po nginx2 app=v2
+```
 ###### Q18
+get apps by label app=v2
+```sh
+kubectl get po -l app=v2
+```
+###### Q19
+Check how the deployment rollout is going
+###### Solution
+```sh
+kubectl rollout status deploy nginx
+```
+###### Q20
+Autoscale the deployment, pods between 5 and 10, targeting CPU utilization at 80%
+###### Solution
+```yml
+kubectl autoscale deploy nginx --min=5 --max=10 --cpu-percent=80
+```
+
+```yml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx
+  minReplicas: 5
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+```
+
+```yml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80  # scale when memory usage exceeds 80%
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75  # scale when CPU usage exceeds 75%
+```
+
+###### Q21
+Pause and resume rollouts for a deployment named nginx
+###### Solution
+```yml
+kubectl rollout pause deploy nginx
+kubectl rollout resume deploy nginx
+```
