@@ -253,6 +253,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 Here's why this is important:
 - Pessimistic locks are held within the scope of a transaction
 - Without `@Transactional` on your service method, the lock would be acquired and released immediately after the repository method completes
+- **When a non-transactional method (e.g., createOrder()) calls a transactional method (e.g., persistOrder()) within the same class, the call bypasses the proxy and goes directly to the target object. This skips transactional behavior because the proxy isn't involved. Which is why it is good practice to make transaction methods in different classes.**
+- this limitation can be by passed with AspectJ bean configuration
+- Transactional methods can not be private
 - Any subsequent operations would not be protected by the lock
 
 ```java
@@ -898,7 +901,7 @@ create a class OrderId.java and the columns in it will server as the primary key
 @AllArgsContructor
 @NoArgsConstructor
 @Embeddable
-public class OrderId implements Serializable{
+public class OrderId implements Serializable {
 	private String username;
 	private LocalDateTime orderDate;
 }

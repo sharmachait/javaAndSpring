@@ -51,7 +51,7 @@ Inside the singleton class the prototype bean will effectively be singleton
 2. Request
 	1. @RequestScope
 	2. new instance for each and every http request
-3. Application
+3. Application = scoped
 	1. @ApplicationScope
 	2. same object as long as the app is running
 

@@ -5,5 +5,6 @@
   "obsidian-prism-theme@@dark-accent-color-preset": "pt-accent-color-cyan-dt",
   "obsidian-prism-theme@@highlight-text-accent-dt": "pt-highlight-text-light-dt",
   "Appearance-dark@@card-layout-open-dark": true,
-  "Appearance-dark@@theme-dark-style-select": "theme-dark-background-darker"
+  "Appearance-dark@@theme-dark-style-select": "theme-dark-background-darker",
+  "mado-miniflow@@theme-color": "theme-tea-teal"
 }

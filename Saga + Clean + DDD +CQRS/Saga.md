@@ -28,7 +28,7 @@ uses ports and adaptors to divide the software into outside(infrastructure layer
 infrastructure will include things that may change over time like DB cloud services UI message queues api, even the framework we are working on
 ##### primary adaptors
 interact with the domain layer directly, the use  the input ports to interact with the domain layer,
-
+input ports are implemented in the domain layer and used by the clients of the domain layer 
 example - rest api controllers or CLI application that can talk to the domain layer to do operations
 
 **primary adapters** are the entry points into your application (e.g., REST controllers, message listeners). They:
@@ -39,6 +39,8 @@ example - rest api controllers or CLI application that can talk to the domain la
 input ports are typically placed in the **application layer** (sometimes called the service or use case layer), sitting between the domain (business logic) and the external adapters (like controllers, APIs, or UI)
 ##### secondary adaptors
 implement the external dependencies by implementing the output ports
+output ports are implemented in the infrastructure layers, and used by the domain layer to reach the infrastructure layer,
+we can swap out the infra if we implement the output ports, quite easily, just would need to change the underlying bean
 
 **output ports are interfaces defined in the domain layer** that represent the operations the domain needs to perform on external systems or infrastructure (like databases, message queues, or external APIs). These interfaces allow the **business logic to remain independent of any specific implementation details** of those external systems
 
@@ -63,10 +65,9 @@ and we can change the under lying data layer without affecting the domain layer
 the domain layer should not have any framework dependency in it, so how to do dependency injection of the data layer ? 
 can be done using a bean registration class in the container of the application 
 The domain/application layer defines _what_ operations it offers (input ports as interfaces). External layers (like UI, REST controllers, CLI, tests) depend on these interfaces, not on concrete implementations
-the API layer can use the input port and choose the implementation in the domain layer to use, allowing us to develop the presenation layer independently like rest controllers or CLI or TCP application
+the API layer can use the input port and choose the implementation in the domain layer to use, allowing us to develop the presentation layer independently like rest controllers or CLI or TCP application
 ![[order-service-hexagonal-section-2-share.png]]
 All the interfaces must be in the domain layer 
-
 ### to visualize the dependency graph  
 ```shell  
 mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.food.ordering.system*:*"  
@@ -89,5 +90,5 @@ mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -Dreduc
 	4. Domain Events - allows De coupling different domains that are in different contexts. this leads to eventual consistency. when we save the changes for one domain, we can fire events to trigger transactions in other domains. via an even source system, like kafka that can play back all the events
 	5. domain service - encapsulates the logic that can not fit into an aggregate, logic that spans multiple aggregates. can communicate with other domain services if necessary
 	6. Application services - used to communicate with components outside the domain and orchestrate transactions in the domain. Does not contain any business logic. only orchestration and communication logic. Event listeners are special kind of application services which should have a domain service to perform business logic, should use the JPA repositories 
-
+![[order-service-domain-logic-oncourse (1).png]]
 # A static class in Java is a nested class declared with the `static` keyword. It is associated with the outer class but doesn't require an instance of the outer class to be instantiated. Static classes can only access static members of the outer class, including static variables, methods, and other static nested classes.
